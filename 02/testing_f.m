@@ -19,7 +19,5 @@ weights_matrix = zeros(length(eta_list), numIter+1);
 for eta_index = 1:length(eta_list)
     eta = eta_list(eta_index);
     [weights, error] = gradientDescentHw2(w0, numIter, eta);
-    size(weights)
-    %weights_matrix(eta_index, :) = weights;
+    plotErrorFunction(weights);
 end
-plotErrorFunction(weights_matrix);
