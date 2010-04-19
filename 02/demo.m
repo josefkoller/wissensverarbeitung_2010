@@ -1,8 +1,9 @@
 
-close all;
+%close all;
 
 %watch the WAVE!
-[w1, w2] = meshgrid(-10:0.1:10, -10:0.1:10);
+CONST = 2;
+[w1, w2] = meshgrid(-CONST:0.1:CONST, -CONST:0.1:CONST);
 result = f(w1, w2);
 figure;
 surf(w1, w2, result);

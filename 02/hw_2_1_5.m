@@ -2,6 +2,7 @@
 
 close all;
 
+if 1 == 2
 eta = 0.1;
 numIter = 100;
 GRID_SIZE = 40;
@@ -17,10 +18,14 @@ for i = 0:GRID_SIZE
     end
 end
 
+end
 % 2_1_6
 
 figure;
-[x, y] = meshgrid(0:GRID_SIZE, 0:GRID_SIZE);
+%[x, y] = meshgrid(0:GRID_SIZE, 0:GRID_SIZE);
+temp = linspace(-2, 2, GRID_SIZE + 1);
+[x, y] = meshgrid(temp, temp);
+
 handle = surf(x, y, minf);
 xlabel('w1');
 ylabel('w2');
