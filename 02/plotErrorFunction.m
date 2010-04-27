@@ -7,7 +7,6 @@ w2 = w1';
 
 error = f(w1, w2);
 
-figure;
 contour(x, y, error, 30); % x,y ... coordinates of the surface; 
                                     % error... heights above the plane;
                                     % error = f(x,y)

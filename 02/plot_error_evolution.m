@@ -2,8 +2,9 @@ function [ ] = plot_error_evolution( w0, eta_list )
     numIter = 100;
     error_list = zeros(length(eta_list), numIter);
     colors = ['g', 'r', 'b', 'm'];
-
+    
     for eta_index = 1:length(eta_list)
+        subplot(2, 2, eta_index);
         eta = eta_list(eta_index);
         [weights, error] = gradientDescentHw2(w0, numIter, eta);
         plotErrorFunction(weights);

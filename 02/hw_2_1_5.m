@@ -2,7 +2,6 @@
 
 close all;
 
-if 1 == 2
 eta = 0.1;
 numIter = 100;
 GRID_SIZE = 40;
@@ -18,7 +17,6 @@ for i = 0:GRID_SIZE
     end
 end
 
-end
 % 2_1_6
 
 figure;
