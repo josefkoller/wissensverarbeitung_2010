@@ -67,13 +67,12 @@ Daniel Ladenhauf
 Christof Sirk
 \end_layout
 
-\begin_layout Part*
-2.1 Gradient Descent
+\begin_layout Section
+Gradient Descent
 \end_layout
 
-\begin_layout Section*
-1.
- Gradient and Gradient Descent Update Rules
+\begin_layout Subsection
+Gradient and Gradient Descent Update Rules
 \end_layout
 
 \begin_layout Standard
@@ -207,9 +206,8 @@ Gradient Descent Update Rules:
 ???
 \end_layout
 
-\begin_layout Section*
-2.
- Gradient Descent Minimization Algorithm
+\begin_layout Subsection
+Gradient Descent Minimization Algorithm
 \end_layout
 
 \begin_layout Standard
@@ -293,9 +291,8 @@ We are calculating the gradient of f only one time before we start the loop.
  So if there are many iteration this solution has a better performance.
 \end_layout
 
-\begin_layout Section*
-3.
- Evolution of the Weightvector
+\begin_layout Subsection
+Evolution of the Weightvector
 \end_layout
 
 \begin_layout Standard
@@ -549,9 +546,8 @@ Evolution of the error for each of the learning rates
 sfsf
 \end_layout
 
-\begin_layout Section*
-4.
- Repetition of the Previous Experiment
+\begin_layout Subsection
+Repetition of the Previous Experiment
 \end_layout
 
 \begin_layout Standard
@@ -718,9 +714,8 @@ sf
 sf
 \end_layout
 
-\begin_layout Section*
-5.
- Now we want to evaluate the effect of local mimima.
+\begin_layout Subsection
+Now we want to evaluate the effect of local mimima.
 \end_layout
 
 \begin_layout Standard
@@ -811,9 +806,8 @@ end
 In this script we store the minimal error of each w0 value into a matrix.
 \end_layout
 
-\begin_layout Section*
-6.
- Create a surface plot of these minf values.
+\begin_layout Subsection
+Create a surface plot of these minf values.
  
 \end_layout
 
@@ -979,6 +973,49 @@ In which area do we find the global and in which area only the local minimum?
 
 \begin_layout Standard
 TODO: CONTINUE THIS
+\end_layout
+
+\begin_layout Section
+Backpropagation
+\end_layout
+
+\begin_layout Subsection
+\begin_inset Formula $a_{j}^{(1)}$
+\end_inset
+
+, 
+\begin_inset Formula $z_{j}^{(1)}$
+\end_inset
+
+ and 
+\begin_inset Formula $h_{j}^{(1)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $a_{j}^{(1)}=\left(x-\mu_{j}\right)^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $z_{j}^{(1)}=e^{\left(x-\mu_{j}\right)^{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula $h_{j}^{(1)}=e^{a_{j^{(1)}}}$
+\end_inset
+
+
 \end_layout
 
 \end_body
