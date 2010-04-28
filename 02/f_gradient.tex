@@ -1,0 +1,25 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \title{02/f_gradient.m}
+    \author{\textsc{Matlab}, The Mathworks, Inc.}
+\begin{document}
+\maketitle
+\begin{alltt}
+0001 \textcolor{keyword}{function} [ gradient ] = f\_gradient()
+0002     syms x;
+0003     syms y;
+0004     z = f(x, y);
+0005 
+0006     fx = diff(z, x);
+0007     fy = diff(z, y);
+0008 
+0009     gradient = matlabFunction(fx, fy);
+0010 \textcolor{keyword}{end}
+0011 
+\end{alltt}
+\end{document}

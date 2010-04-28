@@ -1,0 +1,48 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \title{02/plot_error_evolution.m}
+    \author{\textsc{Matlab}, The Mathworks, Inc.}
+\begin{document}
+\maketitle
+\begin{alltt}
+0001 \textcolor{keyword}{function} [ ] = plot\_error\_evolution( w0, eta\_list )
+0002     numIter = 100;
+0003     error\_list = zeros(length(eta\_list), numIter);
+0004     colors = [\textcolor{string}{'g'}, \textcolor{string}{'r'}, \textcolor{string}{'b'}, \textcolor{string}{'m'}];
+0005     
+0006     \textcolor{keyword}{for} eta\_index = 1:length(eta\_list)
+0007         subplot(2, 2, eta\_index);
+0008         eta = eta\_list(eta\_index);
+0009         [weights, error] = gradientDescentHw2(w0, numIter, eta);
+0010         plotErrorFunction(weights);
+0011         title1 = title(sprintf(\textcolor{string}{'error surface for eta \%0.1f'}, eta));
+0012         set(title1, \textcolor{string}{'FontSize'}, 14)
+0013         error\_list(eta\_index, :) = error;
+0014     \textcolor{keyword}{end}
+0015 
+0016     figure;
+0017     hold on;
+0018     title2 = title(\textcolor{string}{'error evolution'});
+0019     set(title2, \textcolor{string}{'FontSize'}, 14)
+0020     
+0021     \textcolor{keyword}{for} error\_index = 1:length(error\_list)
+0022         error = error\_list(error\_index, :);
+0023         color = colors(error\_index);
+0024         plot(1:numIter, error, color);
+0025         xlabel(\textcolor{string}{'iteration'});
+0026         ylabel(\textcolor{string}{'error'});
+0027 
+0028         text = \textcolor{string}{'eta=\%0.2f'};
+0029         legend(sprintf(text, eta\_list(1)), sprintf(text, eta\_list(2)), \textcolor{keyword}{\underline{...}}
+0030         sprintf(text, eta\_list(3)), sprintf(text, eta\_list(4)) );
+0031     \textcolor{keyword}{end}
+0032     hold off;
+0033 \textcolor{keyword}{end}
+0034 
+\end{alltt}
+\end{document}

@@ -1,0 +1,24 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \title{02/demo.m}
+    \author{\textsc{Matlab}, The Mathworks, Inc.}
+\begin{document}
+\maketitle
+\begin{alltt}
+0001 
+0002 \textcolor{comment}{%close all;}
+0003 
+0004 \textcolor{comment}{%watch the WAVE!}
+0005 CONST = 2;
+0006 [w1, w2] = meshgrid(-CONST:0.1:CONST, -CONST:0.1:CONST);
+0007 result = f(w1, w2);
+0008 figure;
+0009 surf(w1, w2, result);
+0010 [xc,yc] = solve(fx,fy,x,y);  \textcolor{comment}{% extrema  SYMBOLIC}
+\end{alltt}
+\end{document}

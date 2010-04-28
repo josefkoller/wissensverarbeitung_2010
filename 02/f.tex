@@ -1,0 +1,21 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \title{02/f.m}
+    \author{\textsc{Matlab}, The Mathworks, Inc.}
+\begin{document}
+\maketitle
+\begin{alltt}
+0001 \textcolor{keyword}{function} [ result ] = f( w1, w2 )
+0002     function1 = -2 * exp(-5 * \textcolor{keyword}{\underline{...}}
+0003         (0.5 * (w1 - 1).\^{}2 + (w2 - 1).\^{}2));
+0004     function2 = - exp(-0.1* \textcolor{keyword}{\underline{...}}
+0005         (4 * (w1 + 1).\^{}2 + 0.5 * w2.\^{}2));
+0006     result = function1 + function2;
+0007 \textcolor{keyword}{end}
+\end{alltt}
+\end{document}

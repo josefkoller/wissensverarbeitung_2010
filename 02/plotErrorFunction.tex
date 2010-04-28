@@ -1,0 +1,31 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \title{02/plotErrorFunction.m}
+    \author{\textsc{Matlab}, The Mathworks, Inc.}
+\begin{document}
+\maketitle
+\begin{alltt}
+0001 \textcolor{keyword}{function} [] = plotErrorFunction(weights)
+0002 
+0003 x = -2:0.1:2;
+0004 y = -2:0.1:2;
+0005 w1 = meshgrid(x, y);
+0006 w2 = w1';
+0007 
+0008 error = f(w1, w2);
+0009 
+0010 contour(x, y, error, 30); \textcolor{comment}{% x,y ... coordinates of the surface; }
+0011                                     \textcolor{comment}{% error... heights above the plane;}
+0012                                     \textcolor{comment}{% error = f(x,y)}
+0013 hold all;
+0014 handle(1) = plot(weights(:,1), weights(:,2), \textcolor{string}{'ro-'}, \textcolor{string}{'LineWidth'}, 1); \textcolor{comment}{% plotting first and second columns of all rows}
+0015 handle(2) = plot(weights(\textcolor{keyword}{end},1), weights(\textcolor{keyword}{end},2), \textcolor{string}{'ks'}, \textcolor{string}{'MarkerSize'}, 4, \textcolor{string}{'LineWidth'}, 3); \textcolor{comment}{% plotting last row ... end vector}
+0016 handle(3) = plot(weights(1,1), weights(1,2), \textcolor{string}{'ko'}, \textcolor{string}{'MarkerSize'}, 4, \textcolor{string}{'LineWidth'}, 3); \textcolor{comment}{% plotting first row .. start vector}
+0017 legend(handle, \textcolor{string}{'Weights'}, \textcolor{string}{'EndVector'}, \textcolor{string}{'StartVector'}, \textcolor{string}{'Location'}, \textcolor{string}{'SouthEast'});
+\end{alltt}
+\end{document}

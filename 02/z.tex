@@ -1,0 +1,30 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \title{02/z.m}
+    \author{\textsc{Matlab}, The Mathworks, Inc.}
+\begin{document}
+\maketitle
+\begin{alltt}
+0001 \textcolor{comment}{% K scalar number of outputs}
+0002 \textcolor{comment}{% M scalar number of hidden units}
+0003 \textcolor{comment}{% w matrix weights KxM}
+0004 \textcolor{comment}{% my vector weights M}
+0005 \textcolor{comment}{% x scalar input}
+0006 \textcolor{keyword}{function} [ result ] = z( K, M, w, my, x )
+0007     result = zeros(K);
+0008     \textcolor{keyword}{for} k = 1:(K+1)
+0009         argument = 0;
+0010         \textcolor{keyword}{for} j = 1:(M+1)
+0011             argument = argument + w(k, j) * exp((x - my(j))\^{}2);
+0012         \textcolor{keyword}{end}
+0013         result(k) = tanh(argument);
+0014     \textcolor{keyword}{end}
+0015 \textcolor{keyword}{end}
+0016 
+\end{alltt}
+\end{document}

@@ -1,0 +1,27 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \title{02/gradientDescentHw2.m}
+    \author{\textsc{Matlab}, The Mathworks, Inc.}
+\begin{document}
+\maketitle
+\begin{alltt}
+0001 \textcolor{keyword}{function} [weights, error] = gradientDescentHw2(w0, numIter, eta)
+0002     error = zeros(numIter, 1);
+0003     weights = zeros(numIter + 1, 2);
+0004     weights(1, :) = w0;
+0005     w = w0;
+0006     gradient = f\_gradient();
+0007     \textcolor{keyword}{for} iteration = 1:numIter
+0008         error(iteration) = f(w(1), w(2));
+0009         [dw1, dw2] = gradient(w(1), w(2));
+0010         w = w - eta * [dw1, dw2];
+0011         weights(iteration + 1, :) = w;
+0012     \textcolor{keyword}{end}
+0013 \textcolor{keyword}{end}
+\end{alltt}
+\end{document}

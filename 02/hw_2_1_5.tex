@@ -1,0 +1,49 @@
+\documentclass[a4paper,10pt]{article}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \title{02/hw_2_1_5.m}
+    \author{\textsc{Matlab}, The Mathworks, Inc.}
+\begin{document}
+\maketitle
+\begin{alltt}
+0001 \textcolor{comment}{%hw\_2\_1\_5}
+0002 
+0003 close all;
+0004 
+0005 eta = 0.1;
+0006 numIter = 100;
+0007 GRID\_SIZE = 40;
+0008 
+0009 minf = zeros(GRID\_SIZE + 1, GRID\_SIZE + 1);
+0010 
+0011 \textcolor{keyword}{for} i = 0:GRID\_SIZE
+0012     \textcolor{keyword}{for} j = 0:GRID\_SIZE
+0013         w0 = [-2 + 0.1 * i, -2 + 0.1 * j];    
+0014         [weights, error\_list] = gradientDescentHw2(w0, numIter, eta);
+0015         error = error\_list(end);
+0016         minf(i + 1, j + 1) = error;
+0017     \textcolor{keyword}{end}
+0018 \textcolor{keyword}{end}
+0019 
+0020 \textcolor{comment}{% 2\_1\_6}
+0021 
+0022 figure;
+0023 \textcolor{comment}{%[x, y] = meshgrid(0:GRID\_SIZE, 0:GRID\_SIZE);}
+0024 temp = linspace(-2, 2, GRID\_SIZE + 1);
+0025 [x, y] = meshgrid(temp, temp);
+0026 
+0027 handle = surf(x, y, minf);
+0028 xlabel(\textcolor{string}{'w1'});
+0029 ylabel(\textcolor{string}{'w2'});
+0030 zlabel(\textcolor{string}{'error'});
+0031 
+0032 \textcolor{keyword}{global}\_min\_point\_count = sum(sum(minf < -2 ));
+0033 \textcolor{keyword}{global}\_min\_point\_percentage = \textcolor{keyword}{global}\_min\_point\_count / GRID\_SIZE \^{} 2 * 100
+0034 
+0035 
+\end{alltt}
+\end{document}
