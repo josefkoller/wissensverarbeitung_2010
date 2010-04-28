@@ -189,6 +189,24 @@ We are using the symbolic toolkit to calculate the gradient of the function
 TODO: INSERT f_gradient result here!
 \end_layout
 
+\begin_layout Standard
+Gradient Descent Update Rules:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{1}=w_{1}-\eta\frac{\partial f}{\partial w_{1}}$
+\end_inset
+
+???
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $w_{2}=w_{2}-\eta\frac{\partial f}{\partial w_{2}}$
+\end_inset
+
+???
+\end_layout
+
 \begin_layout Section*
 2.
  Gradient Descent Minimization Algorithm
@@ -503,7 +521,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename plot5.png
+	filename 2-1-3-error-evolution.png
 
 \end_inset
 
@@ -585,7 +603,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename plot6.png
+	filename 2-1-4.png
 
 \end_inset
 
@@ -597,108 +615,6 @@ status open
 
 \begin_layout Plain Layout
 Evolution of the weightvector for an eta value of 4.0
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename plot7.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 3.0
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename plot8.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 2.0
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename plot9.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 1.0
 \end_layout
 
 \end_inset
@@ -725,7 +641,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename plot10.png
+	filename 2-1-4-error-evolution.png
 
 \end_inset
 

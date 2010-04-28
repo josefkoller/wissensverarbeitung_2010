@@ -9,14 +9,15 @@ function [ ] = plot_error_evolution( w0, eta_list )
         [weights, error] = gradientDescentHw2(w0, numIter, eta);
         plotErrorFunction(weights);
         title1 = title(sprintf('error surface for eta %0.1f', eta));
-        set(title1, 'FontSize', 18)
+        set(title1, 'FontSize', 14)
         error_list(eta_index, :) = error;
     end
 
     figure;
     hold on;
-    title('error evolution');
-
+    title2 = title('error evolution');
+    set(title2, 'FontSize', 14)
+    
     for error_index = 1:length(error_list)
         error = error_list(error_index, :);
         color = colors(error_index);
