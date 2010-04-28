@@ -8,8 +8,8 @@ function [ ] = plot_error_evolution( w0, eta_list )
         eta = eta_list(eta_index);
         [weights, error] = gradientDescentHw2(w0, numIter, eta);
         plotErrorFunction(weights);
-        title(sprintf('error surface for eta %0.1f', eta) );
-
+        title1 = title(sprintf('error surface for eta %0.1f', eta));
+        set(title1, 'FontSize', 18)
         error_list(eta_index, :) = error;
     end
 
