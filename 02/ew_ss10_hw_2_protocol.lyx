@@ -3,6 +3,9 @@
 \begin_document
 \begin_header
 \textclass article
+\begin_preamble
+\date{}
+\end_preamble
 \use_default_options true
 \language english
 \inputencoding auto
@@ -47,31 +50,38 @@
 \begin_body
 
 \begin_layout Title
-Homework 2: Gradient descent and Backpropagation
-\end_layout
-
-\begin_layout Standard
-\align center
 Einfuehrung in die Wissensverarbeitung, SS 10
 \end_layout
 
 \begin_layout Author
-Josef Koller
+Josef Koller, Daniel Ladenhauf, Christof Sirk
 \end_layout
 
-\begin_layout Author
-Daniel Ladenhauf
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setcounter{section}{1}
 \end_layout
 
-\begin_layout Author
-Christof Sirk
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
-Gradient Descent
+Gradient descent and Backpropagation
 \end_layout
 
 \begin_layout Subsection
+Gradient Descent
+\end_layout
+
+\begin_layout Subsubsection
 Gradient and Gradient Descent Update Rules
 \end_layout
 
@@ -206,7 +216,7 @@ Gradient Descent Update Rules:
 ???
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Gradient Descent Minimization Algorithm
 \end_layout
 
@@ -291,7 +301,7 @@ We are calculating the gradient of f only one time before we start the loop.
  So if there are many iteration this solution has a better performance.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Evolution of the Weightvector
 \end_layout
 
@@ -546,7 +556,7 @@ Evolution of the error for each of the learning rates
 sfsf
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Repetition of the Previous Experiment
 \end_layout
 
@@ -673,7 +683,7 @@ sf
 sf
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsubsection*
 What kind of problems occur for the different learning rates?
 \end_layout
 
@@ -685,7 +695,7 @@ sf
 sf
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsubsection*
 When do we find a local and when a global minimum?
 \end_layout
 
@@ -697,7 +707,7 @@ sf
 sf
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsubsection*
 Why do we need to use a completely different range for the η values for
  the two different initial weight vectors?
 \end_layout
@@ -714,7 +724,7 @@ sf
 sf
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Now we want to evaluate the effect of local mimima.
 \end_layout
 
@@ -806,7 +816,7 @@ end
 In this script we store the minimal error of each w0 value into a matrix.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
 Create a surface plot of these minf values.
  
 \end_layout
@@ -967,7 +977,7 @@ The above plot from another point of view.
 
 \end_layout
 
-\begin_layout Subsection*
+\begin_layout Subsubsection*
 In which area do we find the global and in which area only the local minimum?
 \end_layout
 
@@ -975,7 +985,7 @@ In which area do we find the global and in which area only the local minimum?
 TODO: CONTINUE THIS
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Backpropagation
 \end_layout
 
@@ -1132,6 +1142,42 @@ output (2)
 </cell>
 </row>
 </lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\delta_{j}^{(2)}=\frac{\partial E}{\partial a_{j^{(2)}}}=\frac{\partial\sum_{k=1}^{K}\left(z_{k}^{(2)}-y_{k}^{(2)}\right)^{2}}{\partial a_{j}^{(2)}}=2\left(z_{j}^{(2)}-y_{j}^{(2)}\right)h^{\prime(2)}\left(a_{j}^{(2)}\right)=2\left(tanh\left(a_{j}^{(2)}\right)-y_{j}^{(2)}\right)\left(1-tanh\left(a_{j}^{(2)}\right)\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\Delta w_{kj}=\eta\delta_{j}^{(2)}z_{j}^{(2)}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\delta_{j}^{(1)}=h^{\prime(1)}\left(a_{j}^{(1)}\right)\sum_{l=1}^{K}\delta_{l}^{(2)}w_{lj}^{(2)}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\Delta\mu_{j}=\eta\delta_{j}^{(1)}z_{j}^{(1)}\]
 
 \end_inset
 
