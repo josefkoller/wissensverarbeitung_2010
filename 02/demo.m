@@ -7,4 +7,7 @@ CONST = 2;
 result = f(w1, w2);
 figure;
 surf(w1, w2, result);
+title1 = title('f');
+colorbar;
+set(title1, 'FontSize', 14);
 [xc,yc] = solve(fx,fy,x,y);  % extrema  SYMBOLIC

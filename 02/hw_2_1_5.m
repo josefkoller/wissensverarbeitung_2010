@@ -27,7 +27,7 @@ handle = surf(x, y, minf);
 xlabel('w1');
 ylabel('w2');
 zlabel('error');
-tile1 = title('minf values');
+title1 = title('minf values');
 set(title1, 'FontSize', 14);
 
 global_min_point_count = sum(sum(minf < -2 ));

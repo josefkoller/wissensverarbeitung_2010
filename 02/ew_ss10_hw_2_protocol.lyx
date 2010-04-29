@@ -178,6 +178,45 @@ end{alltt}
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename f.png
+	lyxscale 25
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Plot of the function f
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \noindent
 \begin_inset ERT
 status open
@@ -264,10 +303,11 @@ We are using the symbolic toolkit to calculate the gradient of the function
 \end_layout
 
 \begin_layout Standard
-\noindent
-\begin_inset Formula $\nabla f=\begin{array}{c}
+\begin_inset Formula \[
+\nabla f=\begin{array}{c}
 -10(w_{1}-1)e^{-5(0.5(w_{1}-1)\text{²}+(w_{2}-1)\text{²})}+0.8(w_{1}+1)e^{-0.1(4(w_{1}+1)\text{²}+0.5(w_{2})\text{²}))}\\
--4(w_{1}-1)e^{-5(0.5(w_{1}-1)\text{²}+(w_{2}-1)\text{²})}+0.1w_{2}e^{-0.1(4(w_{1}+1)\text{²}+0.5(w_{2})\text{²}))}\end{array}$
+-4(w_{1}-1)e^{-5(0.5(w_{1}-1)\text{²}+(w_{2}-1)\text{²})}+0.1w_{2}e^{-0.1(4(w_{1}+1)\text{²}+0.5(w_{2})\text{²}))}\end{array}\]
+
 \end_inset
 
 
@@ -279,19 +319,21 @@ Gradient Descent Update Rules:
 \end_layout
 
 \begin_layout Standard
-\noindent
-\begin_inset Formula $w_{1}=w_{1}-\eta\frac{\partial f}{\partial w_{1}}$
+\begin_inset Formula \[
+w_{1}=w_{1}-\eta\frac{\partial f}{\partial w_{1}}\]
+
 \end_inset
 
-???
+
 \end_layout
 
 \begin_layout Standard
-\noindent
-\begin_inset Formula $w_{2}=w_{2}-\eta\frac{\partial f}{\partial w_{2}}$
+\begin_inset Formula \[
+w_{2}=w_{2}-\eta\frac{\partial f}{\partial w_{2}}\]
+
 \end_inset
 
-???
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -763,11 +805,6 @@ end{alltt}
 
 \begin_layout Standard
 \noindent
-bliblablo
-\end_layout
-
-\begin_layout Standard
-\noindent
 \begin_inset Float figure
 wide false
 sideways false
@@ -778,6 +815,7 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Graphics
 	filename 2-1-3.png
 	lyxscale 25
@@ -820,6 +858,7 @@ status open
 \begin_inset Graphics
 	filename 2-1-3-error-evolution.png
 	lyxscale 25
+	scale 50
 
 \end_inset
 
@@ -845,7 +884,7 @@ Evolution of the error for each of the learning rates
 
 \begin_layout Subsubsection
 \noindent
-Repetition of the Previous Experiment
+Repetition of the Previous Experiment with other Values
 \end_layout
 
 \begin_layout Standard
@@ -952,7 +991,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 4.0
+Evolution of the Weightvector
 \end_layout
 
 \end_inset
@@ -977,6 +1016,7 @@ status open
 \begin_inset Graphics
 	filename 2-1-4-error-evolution.png
 	lyxscale 25
+	scale 50
 
 \end_inset
 
@@ -1007,9 +1047,10 @@ What kind of problems occur for the different learning rates?
 
 \begin_layout Standard
 \noindent
-If the learning rate is too hight we jump over minima (Figure one shows
- such a case in the top left diagram).
- On the other hand if the value is too low we might not reach a mimimum.
+If the learning rate is too high we jump over minima (Figure 2 shows such
+ a case in the top left diagram).
+ On the other hand if the value is too low and the number of iterations
+ is also too low we might not reach a mimimum.
 \end_layout
 
 \begin_layout Subsubsection*
@@ -1019,8 +1060,8 @@ When do we find a local and when a global minimum?
 
 \begin_layout Standard
 \noindent
-It depends on the initial weight vector.
- If the initial weight vector is in the 'crate' of the global minimum we
+It depends on the initial Weightvector.
+ If the initial Weightvector is in the 'crate' of the global minimum we
  will find the global minimum.
  This is not true if the learning rate is not in a certain range.
 \end_layout
@@ -1032,7 +1073,16 @@ Why do we need to use a completely different range for the η values for
 \end_layout
 
 \begin_layout Standard
-TODO
+The learning rates for the first initial weight vector are small because
+ the way to the global minimum is very steep and we might jump over the
+ minimum with too large values.
+ The surface towards the local minimum in the second case is not so steep
+ and therefore we will not jump over the minimum with a slightly higher
+ learning rate.
+ With too low values though we might have to increase the number of iterations
+ to reach the minimum.
+ Nevertheless, the two largest learning rates for the second initial weight
+ vectors are too high so that we jump over the minimum.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1191,7 +1241,11 @@ end{alltt}
 
 \begin_layout Standard
 \noindent
-In this script we store the minimal error of each w0 value into a matrix.
+In this script we store the minimal error of each 
+\begin_inset Formula $w_{0}$
+\end_inset
+
+ value into a matrix.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1362,6 +1416,7 @@ status open
 \begin_inset Graphics
 	filename 2-1-6.png
 	lyxscale 25
+	scale 60
 
 \end_inset
 
@@ -1372,8 +1427,7 @@ status open
 \begin_inset Caption
 
 \begin_layout Plain Layout
-A surface plot of the minimal error values.
- The minimal value is marked with the cursor.
+A surface plot of the minimal error values
 \end_layout
 
 \end_inset
@@ -1393,8 +1447,25 @@ In which area do we find the global and in which area only the local minimum?
 
 \begin_layout Standard
 \noindent
-We find the global minimum if the initial weightvector is in the 'crate'
- of the global minimum.
+Vectors starting in the blue area end up in the global minimum; vectors
+ from the yellow area in the local minimum.
+ Some start vectors don't find any minimum.
+ These are colored in red.
+\end_layout
+
+\begin_layout Subsubsection
+Fraction of initial weight vectors which end in the global minimum
+\end_layout
+
+\begin_layout Standard
+25,25% of the initial weight vectors end up in the global minimum.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1404,6 +1475,7 @@ Backpropagation
 
 \begin_layout Standard
 \noindent
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="4">
 <features>
@@ -1486,7 +1558,7 @@ hidden (1)
 
 \begin_layout Plain Layout
 \noindent
-\begin_inset Formula $h_{j}^{(1)}=e^{a_{j^{(1)}}}$
+\begin_inset Formula $h_{j}^{(1)}=e^{a_{j}^{(1)}}$
 \end_inset
 
 
@@ -1565,7 +1637,16 @@ output (2)
 \begin_layout Standard
 \noindent
 \begin_inset Formula \[
-\delta_{j}^{(2)}=\frac{\partial E}{\partial a_{j^{(2)}}}=\frac{\partial\sum_{k=1}^{K}\left(z_{k}^{(2)}-y_{k}^{(2)}\right)^{2}}{\partial a_{j}^{(2)}}=2\left(z_{j}^{(2)}-y_{j}^{(2)}\right)h^{\prime(2)}\left(a_{j}^{(2)}\right)=2\left(tanh\left(a_{j}^{(2)}\right)-y_{j}^{(2)}\right)\left(1-tanh\left(a_{j}^{(2)}\right)\right)\]
+\delta_{j}^{(2)}=\frac{\partial E}{\partial a_{j^{(2)}}}=\frac{\partial\sum_{k=1}^{K}\left(z_{k}^{(2)}-y_{k}^{(2)}\right)^{2}}{\partial a_{j}^{(2)}}=2\left(z_{j}^{(2)}-y_{j}^{(2)}\right)h^{\prime(2)}\left(a_{j}^{(2)}\right)=\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\delta_{j}^{(2)}=2\left(tanh\left(a_{j}^{(2)}\right)-y_{j}^{(2)}\right)\left(1-tanh^{2}\left(a_{j}^{(2)}\right)\right)\]
 
 \end_inset
 
