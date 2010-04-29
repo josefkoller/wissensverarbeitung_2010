@@ -20,7 +20,6 @@ end
 % 2_1_6
 
 figure;
-%[x, y] = meshgrid(0:GRID_SIZE, 0:GRID_SIZE);
 temp = linspace(-2, 2, GRID_SIZE + 1);
 [x, y] = meshgrid(temp, temp);
 
@@ -28,6 +27,8 @@ handle = surf(x, y, minf);
 xlabel('w1');
 ylabel('w2');
 zlabel('error');
+tile1 = title('minf values');
+set(title1, 'FontSize', 14);
 
 global_min_point_count = sum(sum(minf < -2 ));
 global_min_point_percentage = global_min_point_count / GRID_SIZE ^ 2 * 100
