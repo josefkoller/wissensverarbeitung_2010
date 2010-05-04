@@ -1,0 +1,1156 @@
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Einfuehrung in die Wissensverarbeitung, SS 10
+\end_layout
+
+\begin_layout Standard
+Homework 3: Neural Networks
+\end_layout
+
+\begin_layout Part*
+3.1 Simple Regression with Neural Networks
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Section*
+1.
+ Calculate the gradient of f and state the gradient descent update rules
+ for w1 and w2.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [ result ] = f( w1, w2 )
+\end_layout
+
+\begin_layout Plain Layout
+
+    function1 = -2 * exp(-5 * ...
+\end_layout
+
+\begin_layout Plain Layout
+
+        (0.5 * (w1 - 1).^2 + (w2 - 1).^2));
+\end_layout
+
+\begin_layout Plain Layout
+
+    function2 = - exp(-0.1* ...
+\end_layout
+
+\begin_layout Plain Layout
+
+        (4 * (w1 + 1).^2 + 0.5 * w2.^2));
+\end_layout
+
+\begin_layout Plain Layout
+
+    result = function1 + function2;
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [ gradient ] = f_gradient()
+\end_layout
+
+\begin_layout Plain Layout
+
+    syms x;
+\end_layout
+
+\begin_layout Plain Layout
+
+    syms y;
+\end_layout
+
+\begin_layout Plain Layout
+
+    z = f(x, y);
+\end_layout
+
+\begin_layout Plain Layout
+
+    fx = diff(z, x);
+\end_layout
+
+\begin_layout Plain Layout
+
+    fy = diff(z, y);
+\end_layout
+
+\begin_layout Plain Layout
+
+    gradient = matlabFunction(fx, fy);
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We are using the symbolic toolkit to calculate the gradient of the function
+ f.
+\end_layout
+
+\begin_layout Standard
+TODO: INSERT f_gradient result here!
+\end_layout
+
+\begin_layout Section*
+2.
+ Implement a gradient descent minimization algorithm for f in matlab.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [weights, error] = gradientDescentHw2(w0, numIter, eta)
+\end_layout
+
+\begin_layout Plain Layout
+
+    error = zeros(numIter, 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+    weights = zeros(numIter + 1, 2);
+\end_layout
+
+\begin_layout Plain Layout
+
+    weights(1, :) = w0;
+\end_layout
+
+\begin_layout Plain Layout
+
+    w = w0;
+\end_layout
+
+\begin_layout Plain Layout
+
+    gradient = f_gradient();
+\end_layout
+
+\begin_layout Plain Layout
+
+    for iteration = 1:numIter
+\end_layout
+
+\begin_layout Plain Layout
+
+        error(iteration) = f(w(1), w(2));
+\end_layout
+
+\begin_layout Plain Layout
+
+        [dw1, dw2] = gradient(w(1), w(2));
+\end_layout
+
+\begin_layout Plain Layout
+
+        w = w - eta * [dw1, dw2];
+\end_layout
+
+\begin_layout Plain Layout
+
+        weights(iteration + 1, :) = w;
+\end_layout
+
+\begin_layout Plain Layout
+
+    end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We are calculating the gradient of f only one time before we start the loop.
+ In the loop we only invoke this function with the current weights.
+ So if there are many iteration this solution has a better performance.
+\end_layout
+
+\begin_layout Section*
+3.
+ Plot the evolution of the weightvector.
+ (...) Also plot the evolution of the error for each of the learning rate.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+%hw_2_1_3.m
+\end_layout
+
+\begin_layout Plain Layout
+
+close all;
+\end_layout
+
+\begin_layout Plain Layout
+
+w0 = [0.2, 0.5]; eta_list = 0.4:-0.1:0.1; % step size
+\end_layout
+
+\begin_layout Plain Layout
+
+plot_error_evolution(w0, eta_list);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+function [ ] = plot_error_evolution( w0, eta_list )
+\end_layout
+
+\begin_layout Plain Layout
+
+    numIter = 100;
+\end_layout
+
+\begin_layout Plain Layout
+
+    error_list = zeros(length(eta_list), numIter);
+\end_layout
+
+\begin_layout Plain Layout
+
+    colors = ['g', 'r', 'b', 'm'];
+\end_layout
+
+\begin_layout Plain Layout
+
+    for eta_index = 1:length(eta_list)
+\end_layout
+
+\begin_layout Plain Layout
+
+        eta = eta_list(eta_index);
+\end_layout
+
+\begin_layout Plain Layout
+
+        [weights, error] = gradientDescentHw2(w0, numIter, eta);
+\end_layout
+
+\begin_layout Plain Layout
+
+        plotErrorFunction(weights);
+\end_layout
+
+\begin_layout Plain Layout
+
+        title(sprintf('error surface for eta %0.1f', eta) );
+\end_layout
+
+\begin_layout Plain Layout
+
+        error_list(eta_index, :) = error;
+\end_layout
+
+\begin_layout Plain Layout
+
+    end
+\end_layout
+
+\begin_layout Plain Layout
+
+    figure;
+\end_layout
+
+\begin_layout Plain Layout
+
+    hold on;
+\end_layout
+
+\begin_layout Plain Layout
+
+    title('error evolution');
+\end_layout
+
+\begin_layout Plain Layout
+
+    for error_index = 1:length(error_list)
+\end_layout
+
+\begin_layout Plain Layout
+
+        error = error_list(error_index, :);
+\end_layout
+
+\begin_layout Plain Layout
+
+        color = colors(error_index);
+\end_layout
+
+\begin_layout Plain Layout
+
+        plot(1:numIter, error, color);
+\end_layout
+
+\begin_layout Plain Layout
+
+        xlabel('iteration');
+\end_layout
+
+\begin_layout Plain Layout
+
+        ylabel('error');
+\end_layout
+
+\begin_layout Plain Layout
+
+        text = 'eta=%0.2f';
+\end_layout
+
+\begin_layout Plain Layout
+
+        legend(sprintf(text, eta_list(1)), sprintf(text, eta_list(2)), ...
+\end_layout
+
+\begin_layout Plain Layout
+
+        sprintf(text, eta_list(3)), sprintf(text, eta_list(4)) );
+\end_layout
+
+\begin_layout Plain Layout
+
+    end
+\end_layout
+
+\begin_layout Plain Layout
+
+    hold off;
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+bliblablo
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot1.png
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the weightvector for an eta value of 0.4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+g
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot2.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the weightvector for an eta value of 0.3
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot3.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the weightvector for an eta value of 0.2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot4.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the weightvector for an eta value of 0.1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ssffsf
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot5.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the error for each of the learning rates
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sfsf
+\end_layout
+
+\begin_layout Section*
+4.
+ Repeat the previous experiment for other values (...) and interpret your results.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+%hw_2_1_4.m
+\end_layout
+
+\begin_layout Plain Layout
+
+close all;
+\end_layout
+
+\begin_layout Plain Layout
+
+w0 = [-0.2, -0.5];
+\end_layout
+
+\begin_layout Plain Layout
+
+eta_list = 4:-1:1; % step size
+\end_layout
+
+\begin_layout Plain Layout
+
+plot_error_evolution(w0, eta_list);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Standard
+sf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot6.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the weightvector for an eta value of 4.0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sfsf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot7.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the weightvector for an eta value of 3.0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sfsf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot8.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the weightvector for an eta value of 2.0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sfsf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot9.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the weightvector for an eta value of 1.0
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sfsf
+\end_layout
+
+\begin_layout Standard
+sf
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot10.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Evolution of the error for each of the learning rates
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sfsf
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Subsection*
+What kind of problems occur for the different learning rates?
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Subsection*
+When do we find a local and when a global minimum?
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Subsection*
+Why do we need to use a completely different range for the η values for
+ the two different initial weight vectors?
+\end_layout
+
+\begin_layout Standard
+sfsf
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Standard
+sf
+\end_layout
+
+\begin_layout Section*
+5.
+ Now we want to evaluate the effect of local mimima.
+\end_layout
+
+\begin_layout Standard
+fsf
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+%hw_2_1_5
+\end_layout
+
+\begin_layout Plain Layout
+
+close all;
+\end_layout
+
+\begin_layout Plain Layout
+
+eta = 0.1;
+\end_layout
+
+\begin_layout Plain Layout
+
+numIter = 100;
+\end_layout
+
+\begin_layout Plain Layout
+
+GRID_SIZE = 40;
+\end_layout
+
+\begin_layout Plain Layout
+
+minf = zeros(GRID_SIZE + 1, GRID_SIZE + 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+for i = 0:GRID_SIZE
+\end_layout
+
+\begin_layout Plain Layout
+
+    for j = 0:GRID_SIZE
+\end_layout
+
+\begin_layout Plain Layout
+
+        w0 = [-2 + 0.1 * i, -2 + 0.1 * j];    
+\end_layout
+
+\begin_layout Plain Layout
+
+        [weights, error_list] = gradientDescentHw2(w0, numIter, eta);
+\end_layout
+
+\begin_layout Plain Layout
+
+        error = error_list(end);
+\end_layout
+
+\begin_layout Plain Layout
+
+        minf(i + 1, j + 1) = error;
+\end_layout
+
+\begin_layout Plain Layout
+
+    end
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this script we store the minimal error of each w0 value into a matrix.
+\end_layout
+
+\begin_layout Section*
+6.
+ Create a surface plot of these minf values.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% 2_1_6
+\end_layout
+
+\begin_layout Plain Layout
+
+figure;
+\end_layout
+
+\begin_layout Plain Layout
+
+%[x, y] = meshgrid(0:GRID_SIZE, 0:GRID_SIZE);
+\end_layout
+
+\begin_layout Plain Layout
+
+temp = linspace(-2, 2, GRID_SIZE + 1);
+\end_layout
+
+\begin_layout Plain Layout
+
+[x, y] = meshgrid(temp, temp);
+\end_layout
+
+\begin_layout Plain Layout
+
+handle = surf(x, y, minf);
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel('w1');
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel('w2');
+\end_layout
+
+\begin_layout Plain Layout
+
+zlabel('error');
+\end_layout
+
+\begin_layout Plain Layout
+
+global_min_point_count = sum(sum(minf < -2 ));
+\end_layout
+
+\begin_layout Plain Layout
+
+global_min_point_percentage = global_min_point_count / GRID_SIZE ^ 2 * 100
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The two scripts above are located in the same file.
+ So the calculated minf matrix is available in the second script.
+ We are using the linspace-function to get a meshgrid, with the correct
+ scaling for the plot.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename protokoll_daten/plot11.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A surface plot of the minimal error values
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+sfsf
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename protokoll_daten/plot12.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The above plot from another point of view.
+ We also marked the minimal value here.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+In which area do we find the global and in which area only the local minimum?
+\end_layout
+
+\begin_layout Standard
+TODO: CONTINUE THIS
+\end_layout
+
+\end_body
+\end_document
