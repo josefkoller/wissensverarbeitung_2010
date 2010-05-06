@@ -3,12 +3,12 @@ function [] = plot_mse(neuron_number, mse_train_list, mse_test_list, plot_filena
     
     hold on; 
      
-    plot(1:neuron_number, mse_train_list, 'r');
-    title('MSE over the used neuron count - training data'));
+    plot(mse_train_list, 'r');
+    title('MSE over the used neuron count - training data');
     ylabel('Mean Squared Error with Regularization (msereg)');
     xlabel('# neuron');
   
-    plot(neuron_numbers, mse_test_list, 'b');
+    plot(mse_test_list, 'b');
     title('MSE over the used neuron count - test data');
     ylabel('Mean Squared Error with Regularization (msereg)');
     xlabel('# neuron');
