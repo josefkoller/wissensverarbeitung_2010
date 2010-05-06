@@ -36,35 +36,12 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
        plotbrowser;
        [net, perf] = train(net, x_train, y_train, [],[],[], TestSet);
 
-       mseTrain = sum((y_train - sim(net, x_train)).^2) / length(x_train);
-       mseTest = sum((y_test - sim(net, x_test)).^2) / length(x_test);
-
-       figure;
-       clf reset
+       %clf reset
 
        y_learned = sim(net, x);
-
-       figure;
-       hold on;
-       
-       title_getter(index)
-       title(title_getter(index));
-       
-       plot(x_train, y_train, 'g.');
-       plot(x, y_learned, 'm'); 
-
-       title(title_getter(index));
-       
-       figure;
-       hold on;
-       plot(mseTrain, 'r');
-       plot(mseTest, 'b');
-       ylabel('Mean Squared Error with Regularization (msereg)');
-       xlabel('Epochs');
-       legend('Test', 'Train');
-       print('-dpng', '-r300', sprintf('plot_%s_%d.png', ...
-           plot_filename_prefix, index));
-       hold off;
+       title_front = title_getter(index);
+       plot_curves_and_mse(x, y_learned, x_train, y_train, title_front, ...
+           plot_filename_prefix, index, net, x_test, y_test);
     end
 end
 

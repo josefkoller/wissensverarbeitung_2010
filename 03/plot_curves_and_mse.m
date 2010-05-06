@@ -1,4 +1,5 @@
-function plot_curves_and_mse(x, y_learned, x_train, y_train, title_front)
+function [] = plot_curves_and_mse(x, y_learned, x_train, y_train, ...
+    title_front, plot_filename_prefix, index, net, x_test, y_test)
     figure;
       
     hold on;
@@ -22,7 +23,7 @@ function plot_curves_and_mse(x, y_learned, x_train, y_train, title_front)
     if(do_plot_mse)  
         mse_train = sum((y_train - sim(net, x_train)).^2) / length(x_train);
         mse_test = sum((y_test - sim(net, x_test)).^2) / length(x_test);
-         
+        figure; 
         hold on; 
          
         plot(mse_train, 'r');
