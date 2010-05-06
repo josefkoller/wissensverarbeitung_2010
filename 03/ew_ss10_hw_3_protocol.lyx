@@ -3,6 +3,16 @@
 \begin_document
 \begin_header
 \textclass article
+\begin_preamble
+\date{}
+    \usepackage{alltt}
+    \usepackage{color}
+    \usepackage{fullpage}
+    \definecolor{string}{rgb}{0.7,0.0,0.0}
+    \definecolor{comment}{rgb}{0.13,0.54,0.13}
+    \definecolor{keyword}{rgb}{0.0,0.0,1.0}
+    \definecolor{linenr}{rgb}{0.16,0.64,0.83}
+\end_preamble
 \use_default_options true
 \language english
 \inputencoding auto
@@ -16,15 +26,21 @@
 \font_tt_scale 100
 
 \graphics default
+\float_placement H
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_amsmath 1
 \use_esint 1
 \cite_engine basic
 \use_bibtopic false
 \paperorientation portrait
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -41,66 +57,26 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Title
+\noindent
 Einfuehrung in die Wissensverarbeitung, SS 10
 \end_layout
 
-\begin_layout Standard
-Homework 3: Neural Networks
-\end_layout
-
-\begin_layout Part*
-3.1 Simple Regression with Neural Networks
+\begin_layout Author
+\noindent
+Josef Koller, Daniel Ladenhauf, Christof Sirk
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Section*
-1.
- Calculate the gradient of f and state the gradient descent update rules
- for w1 and w2.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
+\noindent
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-function [ result ] = f( w1, w2 )
-\end_layout
 
-\begin_layout Plain Layout
-
-    function1 = -2 * exp(-5 * ...
-\end_layout
-
-\begin_layout Plain Layout
-
-        (0.5 * (w1 - 1).^2 + (w2 - 1).^2));
-\end_layout
-
-\begin_layout Plain Layout
-
-    function2 = - exp(-0.1* ...
-\end_layout
-
-\begin_layout Plain Layout
-
-        (4 * (w1 + 1).^2 + 0.5 * w2.^2));
-\end_layout
-
-\begin_layout Plain Layout
-
-    result = function1 + function2;
-\end_layout
-
-\begin_layout Plain Layout
-
-end
+\backslash
+setcounter{section}{2}
 \end_layout
 
 \end_inset
@@ -108,49 +84,25 @@ end
 
 \end_layout
 
+\begin_layout Section
+\noindent
+Neural Networks
+\end_layout
+
+\begin_layout Subsection
+\noindent
+Simple Regression with Neural Networks
+\end_layout
+
 \begin_layout Standard
-\begin_inset listings
-inline false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-function [ gradient ] = f_gradient()
-\end_layout
 
-\begin_layout Plain Layout
-
-    syms x;
-\end_layout
-
-\begin_layout Plain Layout
-
-    syms y;
-\end_layout
-
-\begin_layout Plain Layout
-
-    z = f(x, y);
-\end_layout
-
-\begin_layout Plain Layout
-
-    fx = diff(z, x);
-\end_layout
-
-\begin_layout Plain Layout
-
-    fy = diff(z, y);
-\end_layout
-
-\begin_layout Plain Layout
-
-    gradient = matlabFunction(fx, fy);
-\end_layout
-
-\begin_layout Plain Layout
-
-end
+\backslash
+include{problem_3_1}
 \end_layout
 
 \end_inset
@@ -159,819 +111,566 @@ end
 \end_layout
 
 \begin_layout Standard
-We are using the symbolic toolkit to calculate the gradient of the function
- f.
-\end_layout
-
-\begin_layout Standard
-TODO: INSERT f_gradient result here!
-\end_layout
-
-\begin_layout Section*
-2.
- Implement a gradient descent minimization algorithm for f in matlab.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
+\noindent
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-function [weights, error] = gradientDescentHw2(w0, numIter, eta)
+
+\backslash
+begin{alltt} 
 \end_layout
 
 \begin_layout Plain Layout
 
-    error = zeros(numIter, 1);
+0001 
+\backslash
+textcolor{keyword}{function} [weights, error] = gradientDescentHw2(w0, numIter,
+ eta) 
 \end_layout
 
 \begin_layout Plain Layout
 
-    weights = zeros(numIter + 1, 2);
+0002     error = zeros(numIter, 1); 
 \end_layout
 
 \begin_layout Plain Layout
 
-    weights(1, :) = w0;
+0003     weights = zeros(numIter + 1, 2); 
 \end_layout
 
 \begin_layout Plain Layout
 
-    w = w0;
+0004     weights(1, :) = w0; 
 \end_layout
 
 \begin_layout Plain Layout
 
-    gradient = f_gradient();
+0005     w = w0; 
 \end_layout
 
 \begin_layout Plain Layout
 
-    for iteration = 1:numIter
+0006     gradient = f
+\backslash
+_gradient(); 
 \end_layout
 
 \begin_layout Plain Layout
 
-        error(iteration) = f(w(1), w(2));
+0007     
+\backslash
+textcolor{keyword}{for} iteration = 1:numIter 
 \end_layout
 
 \begin_layout Plain Layout
 
-        [dw1, dw2] = gradient(w(1), w(2));
+0008         error(iteration) = f(w(1), w(2)); 
 \end_layout
 
 \begin_layout Plain Layout
 
-        w = w - eta * [dw1, dw2];
+0009         [dw1, dw2] = gradient(w(1), w(2)); 
 \end_layout
 
 \begin_layout Plain Layout
 
-        weights(iteration + 1, :) = w;
+0010         w = w - eta * [dw1, dw2]; 
 \end_layout
 
 \begin_layout Plain Layout
 
-    end
+0011         weights(iteration + 1, :) = w; 
 \end_layout
 
 \begin_layout Plain Layout
 
-end
+0012     
+\backslash
+textcolor{keyword}{end} 
+\end_layout
+
+\begin_layout Plain Layout
+
+0013 
+\backslash
+textcolor{keyword}{end} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{alltt}
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-We are calculating the gradient of f only one time before we start the loop.
- In the loop we only invoke this function with the current weights.
- So if there are many iteration this solution has a better performance.
-\end_layout
-
-\begin_layout Section*
-3.
- Plot the evolution of the weightvector.
- (...) Also plot the evolution of the error for each of the learning rate.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-%hw_2_1_3.m
+
+\backslash
+begin{alltt} 
 \end_layout
 
 \begin_layout Plain Layout
 
-close all;
+0001 
+\backslash
+textcolor{keyword}{function} [ ] = plot
+\backslash
+_error
+\backslash
+_evolution( w0, eta
+\backslash
+_list ) 
 \end_layout
 
 \begin_layout Plain Layout
 
-w0 = [0.2, 0.5]; eta_list = 0.4:-0.1:0.1; % step size
+0002     numIter = 100; 
 \end_layout
 
 \begin_layout Plain Layout
 
-plot_error_evolution(w0, eta_list);
+0003     error
+\backslash
+_list = zeros(length(eta
+\backslash
+_list), numIter); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0004     colors = [
+\backslash
+textcolor{string}{'g'}, 
+\backslash
+textcolor{string}{'r'}, 
+\backslash
+textcolor{string}{'b'}, 
+\backslash
+textcolor{string}{'m'}]; 
+\end_layout
+
+\begin_layout Plain Layout
+
+0005      
+\end_layout
+
+\begin_layout Plain Layout
+
+0006     
+\backslash
+textcolor{keyword}{for} eta
+\backslash
+_index = 1:length(eta
+\backslash
+_list) 
+\end_layout
+
+\begin_layout Plain Layout
+
+0007         subplot(2, 2, eta
+\backslash
+_index); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0008         eta = eta
+\backslash
+_list(eta
+\backslash
+_index); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0009         [weights, error] = gradientDescentHw2(w0, numIter, eta); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0010         plotErrorFunction(weights); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0011         title1 = title(sprintf(
+\backslash
+textcolor{string}{'error surface for eta 
+\backslash
+%0.1f'}, eta)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0012         set(title1, 
+\backslash
+textcolor{string}{'FontSize'}, 14) 
+\end_layout
+
+\begin_layout Plain Layout
+
+0013         error
+\backslash
+_list(eta
+\backslash
+_index, :) = error; 
+\end_layout
+
+\begin_layout Plain Layout
+
+0014     
+\backslash
+textcolor{keyword}{end} 
+\end_layout
+
+\begin_layout Plain Layout
+
+0015  
+\end_layout
+
+\begin_layout Plain Layout
+
+0016     figure; 
+\end_layout
+
+\begin_layout Plain Layout
+
+0017     hold on; 
+\end_layout
+
+\begin_layout Plain Layout
+
+0018     title2 = title(
+\backslash
+textcolor{string}{'error evolution'}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0019     set(title2, 
+\backslash
+textcolor{string}{'FontSize'}, 14) 
+\end_layout
+
+\begin_layout Plain Layout
+
+0020      
+\end_layout
+
+\begin_layout Plain Layout
+
+0021     
+\backslash
+textcolor{keyword}{for} error
+\backslash
+_index = 1:length(error
+\backslash
+_list) 
+\end_layout
+
+\begin_layout Plain Layout
+
+0022         error = error
+\backslash
+_list(error
+\backslash
+_index, :); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0023         color = colors(error
+\backslash
+_index); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0024         plot(1:numIter, error, color); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0025         xlabel(
+\backslash
+textcolor{string}{'iteration'}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0026         ylabel(
+\backslash
+textcolor{string}{'error'}); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0027  
+\end_layout
+
+\begin_layout Plain Layout
+
+0028         text = 
+\backslash
+textcolor{string}{'eta=
+\backslash
+%0.2f'}; 
+\end_layout
+
+\begin_layout Plain Layout
+
+0029         legend(sprintf(text, eta
+\backslash
+_list(1)), sprintf(text, eta
+\backslash
+_list(2)), 
+\backslash
+textcolor{keyword}{
+\backslash
+underline{...}} 
+\end_layout
+
+\begin_layout Plain Layout
+
+0030         sprintf(text, eta
+\backslash
+_list(3)), sprintf(text, eta
+\backslash
+_list(4)) ); 
+\end_layout
+
+\begin_layout Plain Layout
+
+0031     
+\backslash
+textcolor{keyword}{end} 
+\end_layout
+
+\begin_layout Plain Layout
+
+0032     hold off; 
+\end_layout
+
+\begin_layout Plain Layout
+
+0033 
+\backslash
+textcolor{keyword}{end}   
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{alltt}
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsubsection
+\noindent
+Repetition of the Previous Experiment with other Values
 \end_layout
 
 \begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-function [ ] = plot_error_evolution( w0, eta_list )
-\end_layout
-
-\begin_layout Plain Layout
-
-    numIter = 100;
-\end_layout
-
-\begin_layout Plain Layout
-
-    error_list = zeros(length(eta_list), numIter);
-\end_layout
-
-\begin_layout Plain Layout
-
-    colors = ['g', 'r', 'b', 'm'];
-\end_layout
-
-\begin_layout Plain Layout
-
-    for eta_index = 1:length(eta_list)
-\end_layout
-
-\begin_layout Plain Layout
-
-        eta = eta_list(eta_index);
-\end_layout
-
-\begin_layout Plain Layout
-
-        [weights, error] = gradientDescentHw2(w0, numIter, eta);
-\end_layout
-
-\begin_layout Plain Layout
-
-        plotErrorFunction(weights);
-\end_layout
-
-\begin_layout Plain Layout
-
-        title(sprintf('error surface for eta %0.1f', eta) );
-\end_layout
-
-\begin_layout Plain Layout
-
-        error_list(eta_index, :) = error;
-\end_layout
-
-\begin_layout Plain Layout
-
-    end
-\end_layout
-
-\begin_layout Plain Layout
-
-    figure;
-\end_layout
-
-\begin_layout Plain Layout
-
-    hold on;
-\end_layout
-
-\begin_layout Plain Layout
-
-    title('error evolution');
-\end_layout
-
-\begin_layout Plain Layout
-
-    for error_index = 1:length(error_list)
-\end_layout
-
-\begin_layout Plain Layout
-
-        error = error_list(error_index, :);
-\end_layout
-
-\begin_layout Plain Layout
-
-        color = colors(error_index);
-\end_layout
-
-\begin_layout Plain Layout
-
-        plot(1:numIter, error, color);
-\end_layout
-
-\begin_layout Plain Layout
-
-        xlabel('iteration');
-\end_layout
-
-\begin_layout Plain Layout
-
-        ylabel('error');
-\end_layout
-
-\begin_layout Plain Layout
-
-        text = 'eta=%0.2f';
-\end_layout
-
-\begin_layout Plain Layout
-
-        legend(sprintf(text, eta_list(1)), sprintf(text, eta_list(2)), ...
-\end_layout
-
-\begin_layout Plain Layout
-
-        sprintf(text, eta_list(3)), sprintf(text, eta_list(4)) );
-\end_layout
-
-\begin_layout Plain Layout
-
-    end
-\end_layout
-
-\begin_layout Plain Layout
-
-    hold off;
-\end_layout
-
-\begin_layout Plain Layout
-
-end
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-bliblablo
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot1.png
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 0.4
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-g
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot2.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 0.3
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot3.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 0.2
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot4.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 0.1
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-ssffsf
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot5.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the error for each of the learning rates
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\end_layout
-
-\begin_layout Section*
-4.
- Repeat the previous experiment for other values (...) and interpret your results.
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
-status open
-
-\begin_layout Plain Layout
-
-%hw_2_1_4.m
-\end_layout
-
-\begin_layout Plain Layout
-
-close all;
-\end_layout
-
-\begin_layout Plain Layout
-
-w0 = [-0.2, -0.5];
-\end_layout
-
-\begin_layout Plain Layout
-
-eta_list = 4:-1:1; % step size
-\end_layout
-
-\begin_layout Plain Layout
-
-plot_error_evolution(w0, eta_list);
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Standard
-sf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot6.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 4.0
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot7.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 3.0
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot8.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 2.0
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot9.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the weightvector for an eta value of 1.0
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\end_layout
-
-\begin_layout Standard
-sf
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw2/protokoll_daten/plot10.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-Evolution of the error for each of the learning rates
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-sfsf
-\end_layout
-
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Subsection*
-What kind of problems occur for the different learning rates?
-\end_layout
-
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Subsection*
+\noindent
+If the learning rate is too high we jump over minima (Figure 2 shows such
+ a case in the top left diagram).
+ On the other hand if the value is too low and the number of iterations
+ is also too low we might not reach a mimimum.
+\end_layout
+
+\begin_layout Subsubsection*
+\noindent
 When do we find a local and when a global minimum?
 \end_layout
 
 \begin_layout Standard
-sf
+\noindent
+It depends on the initial Weightvector.
+ If the initial Weightvector is in the 'crate' of the global minimum we
+ will find the global minimum.
+ This is not true if the learning rate is not in a certain range.
 \end_layout
 
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Subsection*
+\begin_layout Subsubsection*
+\noindent
 Why do we need to use a completely different range for the η values for
  the two different initial weight vectors?
 \end_layout
 
 \begin_layout Standard
-sfsf
+The learning rates for the first initial weight vector are small because
+ the way to the global minimum is very steep and we might jump over the
+ minimum with too large values.
+ The surface towards the local minimum in the second case is not so steep
+ and therefore we will not jump over the minimum with a slightly higher
+ learning rate.
+ With too low values though we might have to increase the number of iterations
+ to reach the minimum.
+ Nevertheless, the two largest learning rates for the second initial weight
+ vectors are too high so that we jump over the minimum.
+\end_layout
+
+\begin_layout Subsubsection
+\noindent
+Now we want to evaluate the effect of local mimima.
 \end_layout
 
 \begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Standard
-sf
-\end_layout
-
-\begin_layout Section*
-5.
- Now we want to evaluate the effect of local mimima.
-\end_layout
-
-\begin_layout Standard
-fsf
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-inline false
+\noindent
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-%hw_2_1_5
+
+\backslash
+begin{alltt}
 \end_layout
 
 \begin_layout Plain Layout
 
-close all;
+0001 
+\backslash
+textcolor{comment}{%hw
+\backslash
+_2
+\backslash
+_1
+\backslash
+_5}
 \end_layout
 
 \begin_layout Plain Layout
 
-eta = 0.1;
+0002 
 \end_layout
 
 \begin_layout Plain Layout
 
-numIter = 100;
+0003 close all;
 \end_layout
 
 \begin_layout Plain Layout
 
-GRID_SIZE = 40;
+0004 
 \end_layout
 
 \begin_layout Plain Layout
 
-minf = zeros(GRID_SIZE + 1, GRID_SIZE + 1);
+0005 eta = 0.1;
 \end_layout
 
 \begin_layout Plain Layout
 
-for i = 0:GRID_SIZE
+0006 numIter = 1 00;
 \end_layout
 
 \begin_layout Plain Layout
 
-    for j = 0:GRID_SIZE
+0007 GRID
+\backslash
+_SIZE = 40;
 \end_layout
 
 \begin_layout Plain Layout
 
-        w0 = [-2 + 0.1 * i, -2 + 0.1 * j];    
+0008 
 \end_layout
 
 \begin_layout Plain Layout
 
-        [weights, error_list] = gradientDescentHw2(w0, numIter, eta);
+0009 minf = zeros(GRID
+\backslash
+_SIZE + 1, GRID
+\backslash
+_SIZE + 1);
 \end_layout
 
 \begin_layout Plain Layout
 
-        error = error_list(end);
+0010 
 \end_layout
 
 \begin_layout Plain Layout
 
-        minf(i + 1, j + 1) = error;
+0011 
+\backslash
+textcolor{keyword}{for} i = 0:GRID
+\backslash
+_SIZE
 \end_layout
 
 \begin_layout Plain Layout
 
-    end
+0012     
+\backslash
+textcolor{keyword}{for} j = 0:GRID
+\backslash
+_SIZE
 \end_layout
 
 \begin_layout Plain Layout
 
-end
+0013         w0 = [-2 + 0.1 * i, -2 + 0.1 * j];    
+\end_layout
+
+\begin_layout Plain Layout
+
+0014         [weights, error
+\backslash
+_list] = gradientDescentHw2(w0, numIter, eta);
+\end_layout
+
+\begin_layout Plain Layout
+
+0015         error = error
+\backslash
+_list(end);
+\end_layout
+
+\begin_layout Plain Layout
+
+0016         minf(i + 1, j + 1) = error;
+\end_layout
+
+\begin_layout Plain Layout
+
+0017     
+\backslash
+textcolor{keyword}{end}
+\end_layout
+
+\begin_layout Plain Layout
+
+0018 
+\backslash
+textcolor{keyword}{end}
+\end_layout
+
+\begin_layout Plain Layout
+
+0019 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{alltt}
 \end_layout
 
 \end_inset
@@ -980,73 +679,155 @@ end
 \end_layout
 
 \begin_layout Standard
-In this script we store the minimal error of each w0 value into a matrix.
+\noindent
+In this script we store the minimal error of each 
+\begin_inset Formula $w_{0}$
+\end_inset
+
+ value into a matrix.
 \end_layout
 
-\begin_layout Section*
-6.
- Create a surface plot of these minf values.
+\begin_layout Subsubsection
+\noindent
+Create a surface plot of these minf values.
  
 \end_layout
 
 \begin_layout Standard
-\begin_inset listings
-inline false
+\noindent
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
 
-% 2_1_6
+
+\backslash
+begin{alltt}
 \end_layout
 
 \begin_layout Plain Layout
 
-figure;
+0020 
+\backslash
+textcolor{comment}{% 2
+\backslash
+_1
+\backslash
+_6}
 \end_layout
 
 \begin_layout Plain Layout
 
-%[x, y] = meshgrid(0:GRID_SIZE, 0:GRID_SIZE);
+0021 
 \end_layout
 
 \begin_layout Plain Layout
 
-temp = linspace(-2, 2, GRID_SIZE + 1);
+0022 figure;
 \end_layout
 
 \begin_layout Plain Layout
 
-[x, y] = meshgrid(temp, temp);
+0023 
+\backslash
+textcolor{comment}{%[x, y] = meshgrid(0:GRID
+\backslash
+_SIZE, 0:GRID
+\backslash
+_SIZE);}
 \end_layout
 
 \begin_layout Plain Layout
 
-handle = surf(x, y, minf);
+0024 temp = linspace(-2, 2, GRID
+\backslash
+_SIZE + 1);
 \end_layout
 
 \begin_layout Plain Layout
 
-xlabel('w1');
+0025 [x, y] = meshgrid(temp, temp);
 \end_layout
 
 \begin_layout Plain Layout
 
-ylabel('w2');
+0026 
 \end_layout
 
 \begin_layout Plain Layout
 
-zlabel('error');
+0027 handle = surf(x, y, minf);
 \end_layout
 
 \begin_layout Plain Layout
 
-global_min_point_count = sum(sum(minf < -2 ));
+0028 xlabel(
+\backslash
+textcolor{string}{'w1'});
 \end_layout
 
 \begin_layout Plain Layout
 
-global_min_point_percentage = global_min_point_count / GRID_SIZE ^ 2 * 100
+0029 ylabel(
+\backslash
+textcolor{string}{'w2'});
+\end_layout
+
+\begin_layout Plain Layout
+
+0030 zlabel(
+\backslash
+textcolor{string}{'error'});
+\end_layout
+
+\begin_layout Plain Layout
+
+0031 
+\end_layout
+
+\begin_layout Plain Layout
+
+0032 
+\backslash
+textcolor{keyword}{global}
+\backslash
+_min
+\backslash
+_point
+\backslash
+_count = sum(sum(minf < -2 ));
+\end_layout
+
+\begin_layout Plain Layout
+
+0033 
+\backslash
+textcolor{keyword}{global}
+\backslash
+_min
+\backslash
+_point
+\backslash
+_percentage = 
+\backslash
+textcolor{keyword}{global}
+\backslash
+_min
+\backslash
+_point
+\backslash
+_count / GRID
+\backslash
+_SIZE 
+\backslash
+^{} 2 * 1 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{alltt}
 \end_layout
 
 \end_inset
@@ -1055,6 +836,7 @@ global_min_point_percentage = global_min_point_count / GRID_SIZE ^ 2 * 100
 \end_layout
 
 \begin_layout Standard
+\noindent
 The two scripts above are located in the same file.
  So the calculated minf matrix is available in the second script.
  We are using the linspace-function to get a meshgrid, with the correct
@@ -1062,36 +844,188 @@ The two scripts above are located in the same file.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
+\noindent
+Vectors starting in the blue area end up in the global minimum; vectors
+ from the yellow area in the local minimum.
+ Some start vectors don't find any minimum.
+ These are colored in red.
+\end_layout
 
-\begin_layout Plain Layout
+\begin_layout Subsubsection
+Fraction of initial weight vectors which end in the global minimum
+\end_layout
+
+\begin_layout Standard
+25,25% of the initial weight vectors end up in the global minimum.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+\noindent
+Backpropagation
+\end_layout
+
+\begin_layout Standard
+\noindent
 \align center
-\begin_inset Graphics
-	filename protokoll_daten/plot11.png
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
 
+\begin_layout Plain Layout
+layer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a_{j}$
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Caption
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
 
 \begin_layout Plain Layout
-A surface plot of the minimal error values
-\end_layout
-
+\begin_inset Formula $h_{j}$
 \end_inset
 
 
 \end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
 \begin_layout Plain Layout
+\begin_inset Formula $z_{j}$
+\end_inset
+
 
 \end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+hidden (1)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\noindent
+\begin_inset Formula $a_{j}^{(1)}=\left(x-\mu_{j}\right)^{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\noindent
+\begin_inset Formula $h_{j}^{(1)}=e^{a_{j}^{(1)}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\noindent
+\begin_inset Formula $z_{j}^{(1)}=e^{\left(x-\mu_{j}\right)^{2}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+output (2)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $a_{j}^{(2)}=\sum_{k=1}^{M}w_{jk}\centerdot z_{j}^{(1)}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $h_{j}^{(2)}=tanh\left(a_{j}^{(2)}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $z_{j}^{(2)}=h_{j}^{(2)}\left(a_{j}^{(2)}\right)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
 
 \end_inset
 
@@ -1099,57 +1033,52 @@ A surface plot of the minimal error values
 \end_layout
 
 \begin_layout Standard
-sfsf
+\noindent
+\begin_inset Formula \[
+\delta_{j}^{(2)}=\frac{\partial E}{\partial a_{j^{(2)}}}=\frac{\partial\sum_{k=1}^{K}\left(z_{k}^{(2)}-y_{k}^{(2)}\right)^{2}}{\partial a_{j}^{(2)}}=2\left(z_{j}^{(2)}-y_{j}^{(2)}\right)h^{\prime(2)}\left(a_{j}^{(2)}\right)=\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename protokoll_daten/plot12.png
+\begin_inset Formula \[
+\delta_{j}^{(2)}=2\left(tanh\left(a_{j}^{(2)}\right)-y_{j}^{(2)}\right)\left(1-tanh^{2}\left(a_{j}^{(2)}\right)\right)\]
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-The above plot from another point of view.
- We also marked the minimal value here.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-In which area do we find the global and in which area only the local minimum?
 \end_layout
 
 \begin_layout Standard
-TODO: CONTINUE THIS
+\noindent
+\begin_inset Formula \[
+\Delta w_{kj}=\eta\delta_{j}^{(2)}z_{j}^{(2)}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula \[
+\delta_{j}^{(1)}=h^{\prime(1)}\left(a_{j}^{(1)}\right)\sum_{l=1}^{K}\delta_{l}^{(2)}w_{lj}^{(2)}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Formula \[
+\Delta\mu_{j}=\eta\delta_{j}^{(1)}z_{j}^{(1)}\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
