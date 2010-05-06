@@ -5,6 +5,8 @@ close all;
 
 N = [1,2,3,4,6,8];
 
+x_min = 0;
+x_max = 7;
 plot_filename_prefix = '3_1';
 title_getter = @(index) sprintf('Neuron: %d', N(index) );
 neuron_number_getter = @(index) N(index);
