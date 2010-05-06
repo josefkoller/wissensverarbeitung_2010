@@ -9,7 +9,7 @@ function [] = plot_curves(x, y_learned, x_train, y_train, ...
     ylabel('y training');
    
     plot(x, y_learned, 'm'); 
-    title(sprintf('%s x=0:0.05:7 and y-learned', title_front));
+    title(sprintf('%s x and y-learned', title_front));
     xlabel('x');
     ylabel('y learned');
       

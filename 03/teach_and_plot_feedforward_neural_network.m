@@ -28,6 +28,7 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
     mse_train_list = zeros(1, loop_length);
     mse_test_list = zeros(1, loop_length);
     
+    neuron_number = -1;
     for index = 1:loop_length
        neuron_number = neuron_number_getter(index);
        net = newff([min max], [neuron_number, 1], {'logsig', 'purelin'}, 'trainscg');
@@ -54,26 +55,6 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
 	     mse_test_list(index) = mse_test;
     end
     
-    neuron_numbers = 1:loop_length;
-       
-    clf reset; 
-    
-    hold on; 
-     
-    plot(neuron_numbers, mse_train_list, 'r');
-    title(sprintf('%s MSE over the used neuron count - training data', title_front));
-    ylabel('Mean Squared Error with Regularization (msereg)');
-    xlabel('# neuron');
-  
-    plot(neuron_numbers, mse_test_list, 'r');
-    title(sprintf('%s MSE over the used neuron count - test data', title_front));
-    ylabel('Mean Squared Error with Regularization (msereg)');
-    xlabel('# neuron');
-  
-    legend('MSE training data', 'MSE test data');
-    hold off;
-  
-    print('-dpng', '-r300', sprintf('plot_%s_mse.png', ...
-        plot_filename_prefix));
+    plot_mse(neuron_number, mse_train_list, mse_test_list, plot_filename_prefix);   
 end
 
