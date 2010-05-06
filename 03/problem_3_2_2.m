@@ -14,9 +14,11 @@ y_train = y_train';
 TestSet.P = x_test;
 TestSet.T = y_test;
 
-x = -2:0.01:2;
+min = 0;
+max = 7;
+x = min:0.05:max;
 
-net = newff([-2 2], [20, 1], {'logsig', 'purelin'}, 'trainscg');
+net = newff([0 7], [20, 1], {'logsig', 'purelin'}, 'trainscg');
 
 net = init(net);
 

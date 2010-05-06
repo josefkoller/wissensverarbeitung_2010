@@ -1,6 +1,5 @@
-function [] = plot_mse(neuron_number, mse_train_list, mse_test_list, plot_filename_prefix)
-    clf reset; 
-    
+function [] = plot_mse(mse_train_list, mse_test_list, plot_filename_prefix)
+    figure;
      
     plot(mse_train_list, 'r');
     title('MSEs over the used neuron count');

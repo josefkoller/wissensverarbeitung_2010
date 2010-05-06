@@ -1,5 +1,5 @@
 function [] = plot_curves(x, y_learned, x_train, y_train, ...
-    title_front, plot_filename_prefix, index, net, x_test, y_test)
+    title_front, plot_filename_prefix, index)
     figure;
       
     hold on;

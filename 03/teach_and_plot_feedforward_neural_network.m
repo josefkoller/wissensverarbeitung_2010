@@ -24,7 +24,6 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
     mse_train_list = zeros(1, loop_length);
     mse_test_list = zeros(1, loop_length);
     
-    neuron_number = -1;
     for index = 1:loop_length
        neuron_number = neuron_number_getter(index);
        net = newff([min max], [neuron_number, 1], {'logsig', 'purelin'}, 'trainscg');
@@ -37,24 +36,27 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
        plotbrowser;
        [net, perf] = train(net, x_train, y_train, [],[],[], TestSet);
 
-       clf reset;
-
        y_learned = sim(net, x);
        title_front = title_getter(index);
        plot_curves(x, y_learned, x_train, y_train, title_front, ...
-           plot_filename_prefix, index, net, x_test, y_test);
+           plot_filename_prefix, index);
 	           
-       if( strcmp(net.trainParam.performFcn, 'mse') )
-           mse_train = perf.perf;
-           mse_test = perf.perft;
-       else
+      % if( strcmp(net.performFcn, 'mse') )
+     %      mse_train = perf.perf;
+      %     mse_test = perf.tperf;
+      %     perf
+      % else
 	      mse_train = sum((y_train - sim(net, x_train)).^2) / length(x_train);
 	      mse_test = sum((y_test - sim(net, x_test)).^2) / length(x_test);
-       end
+      % end
+      
+      'size(mse_train)';
+      size(mse_train);
+      
 	   mse_train_list(index) = mse_train; % storing mse_data
        mse_test_list(index) = mse_test;
     end % for loop ends here
     
-    plot_mse(neuron_number, mse_train_list, mse_test_list, plot_filename_prefix);   
+    plot_mse(mse_train_list, mse_test_list, plot_filename_prefix);   
 end
 
