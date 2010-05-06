@@ -110,5 +110,54 @@ input{problem_3_1}
 
 \end_layout
 
+\begin_layout Standard
+TODO: interpret plots, best value of n, compare to hw 1, connection n degree
+ of polynomial
+\end_layout
+
+\begin_layout Subsection
+Regularized Neural Networks
+\end_layout
+
+\begin_layout Subsubsection
+Weight Decay
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{problem_3_2_1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Early Stopping
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{problem_3_2_2}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
