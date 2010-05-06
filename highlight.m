@@ -360,7 +360,7 @@ function format = tex_format
 	format.cont      = '\\textcolor{keyword}{\\underline{%s}}';
 	format.pre_start = '\\begin{alltt}\n';
 	format.pre_end   = '\\end{alltt}\n';
-	format.nb_line   = '%03d ';
+	format.nb_line   = '\\textcolor{linenr}{%03d  }';
 	format.line      = '%s\n';
 
 %-------------------------------------------------------------------------------
