@@ -24,10 +24,15 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
     mse_train_list = zeros(1, loop_length);
     mse_test_list = zeros(1, loop_length);
     
+    epoch_count = 700;
+    if(exist('DEBUG', 'file') )
+        epoch_count = 40;
+    end
+    
     for index = 1:loop_length
        neuron_number = neuron_number_getter(index);
        net = newff([min max], [neuron_number, 1], {'logsig', 'purelin'}, 'trainscg');
-       net.trainParam.epochs = 700;
+       net.trainParam.epochs = epoch_count;
        net.trainParam.show = NaN;
        
        net = net_modifier(net, index);
@@ -40,19 +45,10 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
        title_front = title_getter(index);
        plot_curves(x, y_learned, x_train, y_train, title_front, ...
            plot_filename_prefix, index);
-	           
-      % if( strcmp(net.performFcn, 'mse') )
-     %      mse_train = perf.perf;
-      %     mse_test = perf.tperf;
-      %     perf
-      % else
-	      mse_train = sum((y_train - sim(net, x_train)).^2) / length(x_train);
-	      mse_test = sum((y_test - sim(net, x_test)).^2) / length(x_test);
-      % end
-      
-      'size(mse_train)';
-      size(mse_train);
-      
+
+       mse_train = sum((y_train - sim(net, x_train)).^2) / length(x_train);
+       mse_test = sum((y_test - sim(net, x_test)).^2) / length(x_test);
+
 	   mse_train_list(index) = mse_train; % storing mse_data
        mse_test_list(index) = mse_test;
     end % for loop ends here
