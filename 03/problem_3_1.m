@@ -9,7 +9,7 @@ plot_filename_prefix = '3_1';
 title_getter = @(index) sprintf('Neuron: %d', N(index) );
 neuron_number_getter = @(index) N(index);
 loop_length = length(N);
-net_modifier = @(net, index) setPerformFcn(net, 'msereg');
+net_modifier = @(net, index) setPerformFcn(net, 'mse');
 
 
 teach_and_plot_feedforward_neural_network(plot_filename_prefix, title_getter, ...
