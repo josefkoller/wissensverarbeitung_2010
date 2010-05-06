@@ -12,7 +12,7 @@ loop_length = length(N);
 net_modifier = @(net, index) setPerformFcn(net, 'msereg');
 
 
-solveEverything(plot_filename_prefix, title_getter, ...
+teach_and_plot_feedforward_neural_network(plot_filename_prefix, title_getter, ...
     neuron_number_getter, loop_length, net_modifier );
 
 

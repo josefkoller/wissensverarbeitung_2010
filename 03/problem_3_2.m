@@ -11,5 +11,5 @@ neuron_number_getter = @(index) 8;
 loop_length = length(alpha);
 net_modifier = @(net, index) setPerformFcnAndRatio(net, 'msereg', alpha(index));
 
-solveEverything(plot_filename_prefix, title_getter, ...
+teach_and_plot_feedforward_neural_network(plot_filename_prefix, title_getter, ...
     neuron_number_getter, loop_length, net_modifier );
