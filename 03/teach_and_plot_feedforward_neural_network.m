@@ -32,10 +32,11 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
     for index = 1:loop_length
        neuron_number = neuron_number_getter(index);
        net = newff([min max], [neuron_number, 1], {'logsig', 'purelin'}, 'trainscg');
-       net.trainParam.epochs = 100;
+       net.trainParam.epochs = 700;
        net.trainParam.show = NaN;
        
        net = net_modifier(net, index);
+       
        
        net = init(net);
        plotbrowser;
