@@ -17,18 +17,20 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
     TestSet.P = x_test;
     TestSet.T = y_test;
 
-    x = -2:0.01:2;
+    min = 0;
+    max = 7;
+    x = min:0.05:max;
     %max(x_test) = 6.2637
     %min(x_test) = 0.0058
     %x = linspace(0, 6, 15); %???
     
     for index = 1:loop_length
        neuron_number = neuron_number_getter(index);
-       net = newff([-2 2], [neuron_number, 1], {'logsig', 'purelin'}, 'trainscg');
-       net.trainParam.epochs = 700;
+       net = newff([min max], [neuron_number, 1], {'logsig', 'purelin'}, 'trainscg');
+       net.trainParam.epochs = 100;
        net.trainParam.show = NaN;
        
-       net_modifier(net, index);
+       net = net_modifier(net, index);
        
        net = init(net);
        plotbrowser;
@@ -42,7 +44,12 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
 
        y_learned = sim(net, x);
 
+       figure;
        hold on;
+       
+       title_getter(index)
+       title(title_getter(index));
+       
        plot(x_train, y_train, 'g.');
        plot(x, y_learned, 'm'); 
 
@@ -50,8 +57,8 @@ function [ ] = teach_and_plot_feedforward_neural_network( plot_filename_prefix, 
        
        figure;
        hold on;
-       plot(perf.perf, 'r');
-       plot(perf.tperf, 'b');
+       plot(mseTrain, 'r');
+       plot(mseTest, 'b');
        ylabel('Mean Squared Error with Regularization (msereg)');
        xlabel('Epochs');
        legend('Test', 'Train');
