@@ -40,13 +40,14 @@ for i = 1:length(mse_gradient)
         break;
     end
 end
+epoch_count
 
 %[min_mse, epoch_index_with_min_error] = min(performance.perf);
 
 %configure
 network2 = network;
 network2.trainParam.epochs = epoch_count;
-[network2, performance2] = train(network2, x_train, y_train, [],[],[], TestSet);
+[network2, performance2] = train(network2, x_train, y_train, [],[],[]);
 
 % check trained network with new input
 x = x_min:x_step:x_max;
