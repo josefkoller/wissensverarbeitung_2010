@@ -22,7 +22,7 @@ for neuron_count = neuron_count_list
     mse_train = sum((y_train - sim(network, x_train)).^2) / length(x_train);
     mse_test = sum((y_test - sim(network, x_test)).^2) / length(x_test);
 
-    plot_filename_prefix = sprintf('3_2_1_%d_neurons', neuron_count);
+    plot_filename_prefix = sprintf('3_1_%d_neurons', neuron_count);
     figure_title = sprintf('MSE for the number of epochs used - Simple Regression - neurons: %d', neuron_count);
     error_x_label = '# epochs';
     plot_error(performance.tperf, performance.perf, ...
