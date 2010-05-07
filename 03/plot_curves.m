@@ -1,3 +1,4 @@
+% plot_curves
 function [] = plot_curves(x, y_learned, x_train, y_train, ...
     figure_title, plot_filename_prefix)
     figure;

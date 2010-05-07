@@ -1,8 +1,10 @@
+% create_and_train_network
 function [ network, performance ] = create_and_train_network( x_min, x_max, ...
     neuron_count, performance_function, epoch_count, ...
     x_train, y_train, x_test, y_test, alpha)
 
-    network = newff([x_min x_max], [neuron_count, 1], {'logsig', 'purelin'}, 'trainscg');
+    network = newff([x_min x_max], [neuron_count, 1], ...
+        {'logsig', 'purelin'}, 'trainscg');
     network.performFcn = performance_function;
     network.trainParam.epochs = epoch_count;
     network.trainParam.show = epoch_count;
