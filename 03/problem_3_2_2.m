@@ -4,7 +4,7 @@
 clear all;
 close all;
 
-[ x_test, y_test, x_train, y_train, TestSet, x_min, x_max, x_step] = load_input();
+[ x_test, y_test, x_train, y_train, x_min, x_max, x_step] = load_input();
 
 MIN_GRADIENT_DESCENT = 0.0001;
 performance_function = 'mse';
@@ -23,11 +23,11 @@ x = x_min:x_step:x_max;
 y_learned = sim(network, x);
 
 plot_filename_prefix = sprintf('3_2_2_%d_epochs', epoch_count);
-figure_title = 'training and test data - Early Stopping';
+figure_title = 'Training points and learned function';
 plot_curves(x, y_learned, x_train, y_train, ...
     figure_title, plot_filename_prefix)
 
-figure_title = 'MSE for the number of epochs used - Early Stopping';
+figure_title = 'MSE for the number of epochs used';
 error_x_label = '# epochs';
 plot_error(performance.tperf, performance.perf, ...
     figure_title, error_x_label, plot_filename_prefix); 
@@ -53,7 +53,7 @@ x = x_min:x_step:x_max;
 y_learned = sim(network2, x);
 
 plot_filename_prefix = sprintf('3_2_2_%d_epochs', epoch_count);
-figure_title = 'training and test data - Early Stopping';
+figure_title = 'Training points and learned function';
 plot_curves(x, y_learned, x_train, y_train, ...
     figure_title, plot_filename_prefix)
 

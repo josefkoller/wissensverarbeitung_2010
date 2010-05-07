@@ -4,7 +4,7 @@
 clear all;
 close all;
 
-[ x_test, y_test, x_train, y_train, TestSet, x_min, x_max, x_step] = load_input();
+[ x_test, y_test, x_train, y_train, x_min, x_max, x_step] = load_input();
 
 alpha_list = [0.9, 0.95, 0.975, 0.99, 0.995, 1.0];
 performance_function = 'msereg';
@@ -33,7 +33,7 @@ for alpha = alpha_list
     x = x_min:x_step:x_max;
     y_learned = sim(network, x);
 
-    figure_title = sprintf('training and test data - Weight Decay = alpha: %1.2f', alpha);
+    figure_title = sprintf('Training points and learned function -  alpha: %1.2f', alpha);
     plot_filename_prefix = sprintf('3_2_1_alpha_%1.2f', alpha);
     plot_curves(x, y_learned, x_train, y_train, ...
         figure_title, plot_filename_prefix)
@@ -42,7 +42,7 @@ end
 x = alpha_list;
 
 plot_filename_prefix = '3_2_1_mse_for_alpha';
-figure_title = 'MSE for alpha - Weight Decay';
+figure_title = 'MSE for the regularization factors alpha used';
 error_x_label = 'alpha';
 
 plot_error(mse_train_list, mse_test_list, ...

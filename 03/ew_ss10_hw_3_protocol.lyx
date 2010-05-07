@@ -435,7 +435,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename plot_3_2_1_0.90_alpha_xy_curves.png
+	filename plot_3_2_1_alpha_0.90_xy_curves.png
 	lyxscale 20
 	width 11cm
 	groupId plot
@@ -471,7 +471,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename plot_3_2_1_1.00_alpha_xy_curves.png
+	filename plot_3_2_1_alpha_1.00_xy_curves.png
 	lyxscale 20
 	width 11cm
 	groupId plot
@@ -566,7 +566,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename plot_3_2_2_27_epochs_error.png
+	filename plot_3_2_2_700_epochs_error.png
 	lyxscale 20
 	width 11cm
 	groupId plot
@@ -602,7 +602,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename plot_3_2_2_27_epochs_xy_curves.png
+	filename plot_3_2_2_700_epochs_xy_curves.png
 	lyxscale 20
 	width 11cm
 	groupId plot
