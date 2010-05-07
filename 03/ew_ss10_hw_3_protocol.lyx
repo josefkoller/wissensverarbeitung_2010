@@ -85,11 +85,15 @@ setcounter{section}{2}
 \end_layout
 
 \begin_layout Section
+Neural Networks
+\end_layout
+
+\begin_layout Subsection
 \noindent
 Simple Regression with Neural Networks
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Problem
 \end_layout
 
@@ -115,7 +119,7 @@ The network is trained with the data in 'neuralnetworks.mat' and some plots
  about the function values and mean square erros were taken.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Methods
 \end_layout
 
@@ -157,7 +161,7 @@ input{load_input}
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Results
 \end_layout
 
@@ -312,7 +316,7 @@ The learned function using 8 neurons
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Discussion
 \end_layout
 
@@ -344,11 +348,15 @@ TODO: interpret plots, best value of n, compare to hw 1, connection n degree
  of polynomial
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsection
 Regularized Neural Networks
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
+Weight Decay
+\end_layout
+
+\begin_layout Paragraph
 Problem
 \end_layout
 
@@ -362,7 +370,7 @@ Calculating the full count of epoches/iterations is most of the time a unneeded
  is very low.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Methods
 \end_layout
 
@@ -376,7 +384,7 @@ Most of the code of the first example could also be used for this one.
 TODO: add src
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Results
 \end_layout
 
@@ -413,10 +421,6 @@ The mean squared error of the training and of the test set for the given
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -450,10 +454,6 @@ The learned function for the lowest alpha value = 0.90
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -498,7 +498,7 @@ The learned function for the highest and best alpha value = 1.00
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Discussion
 \end_layout
 
@@ -527,11 +527,11 @@ So here we are using msereg instead of mse for the performance function.
  there is no regulation at all done.
 \end_layout
 
-\begin_layout Section
+\begin_layout Subsubsection
 Early Stopping
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Problem
 \end_layout
 
@@ -544,7 +544,7 @@ As described above, another easy performance improvement is, only to calculate
  epoch count values.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Methods
 \end_layout
 
@@ -553,7 +553,7 @@ Also at this exercise many code lines could be reused in form of abstract
  methods which get the concrete values for the given scenario.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Results
 \end_layout
 
@@ -701,7 +701,7 @@ The learned function - All 700 Epoches.
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Paragraph
 Discussion
 \end_layout
 
