@@ -39,7 +39,7 @@ for neuron_count = neuron_count_list
 end
     
 
-plot_filename_prefix = 'mse_for_neuron_counts';
+plot_filename_prefix = '3_1_mse_for_neuron_counts';
 x = neuron_count_list;
 sprintf('size(x): %d', length(x) )
 sprintf('size(mse_train_list): %d', length(mse_train_list))
