@@ -3,7 +3,7 @@
 clear all;
 close all;
 
-[x_test, y_test, x_train, y_train, TestSet, x_min, x_max, x_step] = load_input();
+[x_test, y_test, x_train, y_train, x_min, x_max, x_step] = load_input();
 
 neuron_count_list = [1,2,3,4,6,8];
 
