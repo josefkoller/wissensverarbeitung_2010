@@ -1,0 +1,42 @@
+\begin{alltt}
+\textcolor{linenr}{001  }
+\textcolor{linenr}{002  }\textcolor{comment}{% problem 3\_1}
+\textcolor{linenr}{003  }
+\textcolor{linenr}{004  }clear all;
+\textcolor{linenr}{005  }close all;
+\textcolor{linenr}{006  }
+\textcolor{linenr}{007  }[ x\_test, y\_test, x\_train, y\_train, TestSet, x\_min, x\_max, x\_step] = load\_input();
+\textcolor{linenr}{008  }
+\textcolor{linenr}{009  }neuron\_count\_list = [1,2,3,4,6,8];
+\textcolor{linenr}{010  }
+\textcolor{linenr}{011  }performance\_function = \textcolor{string}{'mse'};
+\textcolor{linenr}{012  }epoch\_count = 700;
+\textcolor{linenr}{013  }\textcolor{keyword}{if} exist(\textcolor{string}{'SPEED'}, \textcolor{string}{'file'})
+\textcolor{linenr}{014  }    epoch\_count = 50;
+\textcolor{linenr}{015  }\textcolor{keyword}{end}
+\textcolor{linenr}{016  }
+\textcolor{linenr}{017  }\textcolor{keyword}{for} neuron\_count = neuron\_count\_list
+\textcolor{linenr}{018  }    [ network, performance ] = create\_and\_train\_network( x\_min, x\_max, \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{019  }        neuron\_count, performance\_function, epoch\_count, \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{020  }        x\_train, y\_train, x\_test, y\_test);
+\textcolor{linenr}{021  }
+\textcolor{linenr}{022  }    mse\_train = sum((y\_train - sim(network, x\_train)).\^{}2) / length(x\_train);
+\textcolor{linenr}{023  }    mse\_test = sum((y\_test - sim(network, x\_test)).\^{}2) / length(x\_test);
+\textcolor{linenr}{024  }
+\textcolor{linenr}{025  }    plot\_filename\_prefix = sprintf(\textcolor{string}{'3\_1\_\%d\_neurons'}, neuron\_count);
+\textcolor{linenr}{026  }    figure\_title = sprintf(\textcolor{string}{'MSE for the number of epochs used - Simple Regression - neurons: \%d'}, neuron\_count);
+\textcolor{linenr}{027  }    error\_x\_label = \textcolor{string}{'\# epochs'};
+\textcolor{linenr}{028  }    plot\_error(performance.tperf, performance.perf, \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{029  }        figure\_title, error\_x\_label, plot\_filename\_prefix); 
+\textcolor{linenr}{030  }    
+\textcolor{linenr}{031  }    \textcolor{comment}{% check trained network with new input}
+\textcolor{linenr}{032  }    x = x\_min:x\_step:x\_max;
+\textcolor{linenr}{033  }    y\_learned = sim(network, x);
+\textcolor{linenr}{034  }
+\textcolor{linenr}{035  }    figure\_title = sprintf(\textcolor{string}{'training and test data - Weight Decay - Simple Regression - neurons: \%d'}, neuron\_count);
+\textcolor{linenr}{036  }    plot\_curves(x, y\_learned, x\_train, y\_train, \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{037  }        figure\_title, plot\_filename\_prefix)
+\textcolor{linenr}{038  }\textcolor{keyword}{end}
+\textcolor{linenr}{039  }    
+\textcolor{linenr}{040  }
+\end{alltt}

@@ -1,0 +1,44 @@
+\begin{alltt}
+\textcolor{linenr}{001  }
+\textcolor{linenr}{002  }\textcolor{comment}{% problem 3\_2\_1}
+\textcolor{linenr}{003  }
+\textcolor{linenr}{004  }clear all;
+\textcolor{linenr}{005  }close all;
+\textcolor{linenr}{006  }
+\textcolor{linenr}{007  }[ x\_test, y\_test, x\_train, y\_train, TestSet, x\_min, x\_max, x\_step] = load\_input();
+\textcolor{linenr}{008  }
+\textcolor{linenr}{009  }alpha\_list = [0.9, 0.95, 0.975, 0.99, 0.995, 1.0];
+\textcolor{linenr}{010  }performance\_function = \textcolor{string}{'msereg'};
+\textcolor{linenr}{011  }neuron\_count = 8;
+\textcolor{linenr}{012  }epoch\_count = 700;
+\textcolor{linenr}{013  }\textcolor{keyword}{if} exist(\textcolor{string}{'SPEED'}, \textcolor{string}{'file'})
+\textcolor{linenr}{014  }    epoch\_count = 50;
+\textcolor{linenr}{015  }\textcolor{keyword}{end}
+\textcolor{linenr}{016  }
+\textcolor{linenr}{017  }\textcolor{keyword}{for} alpha = alpha\_list
+\textcolor{linenr}{018  }    
+\textcolor{linenr}{019  }    [ network, performance ] = create\_and\_train\_network( x\_min, x\_max, \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{020  }        neuron\_count, performance\_function, epoch\_count, \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{021  }        x\_train, y\_train, x\_test, y\_test,  \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{022  }        alpha);
+\textcolor{linenr}{023  }    
+\textcolor{linenr}{024  }    mse\_train = sum((y\_train - sim(network, x\_train)).\^{}2) / length(x\_train);
+\textcolor{linenr}{025  }    mse\_test = sum((y\_test - sim(network, x\_test)).\^{}2) / length(x\_test);
+\textcolor{linenr}{026  }
+\textcolor{linenr}{027  }    plot\_filename\_prefix = sprintf(\textcolor{string}{'3\_2\_1\_\%1.2f\_alpha'}, alpha);
+\textcolor{linenr}{028  }    figure\_title = sprintf(\textcolor{string}{'MSE for the number of epochs used - Weight Decay - alpha: \%1.2f'}, alpha);
+\textcolor{linenr}{029  }    error\_x\_label = \textcolor{string}{'\# epochs'};
+\textcolor{linenr}{030  }    plot\_error(performance.tperf, performance.perf, \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{031  }        figure\_title, error\_x\_label, plot\_filename\_prefix); 
+\textcolor{linenr}{032  }    
+\textcolor{linenr}{033  }    \textcolor{comment}{% check trained network with new input}
+\textcolor{linenr}{034  }    x = x\_min:x\_step:x\_max;
+\textcolor{linenr}{035  }    y\_learned = sim(network, x);
+\textcolor{linenr}{036  }
+\textcolor{linenr}{037  }    figure\_title = sprintf(\textcolor{string}{'training and test data - Weight Decay = alpha: \%1.2f'}, alpha);
+\textcolor{linenr}{038  }    plot\_curves(x, y\_learned, x\_train, y\_train, \textcolor{keyword}{\underline{...}}
+\textcolor{linenr}{039  }        figure\_title, plot\_filename\_prefix)
+\textcolor{linenr}{040  }
+\textcolor{linenr}{041  }\textcolor{keyword}{end}
+\textcolor{linenr}{042  }    
+\end{alltt}
