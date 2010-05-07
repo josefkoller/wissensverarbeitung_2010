@@ -1,0 +1,5 @@
+
+1.  code ins protokoll einbinden
+2.  bildergruppe 'plot' im lyx umstellen - groesse
+3.  pdf generieren
+4.  abgeben
