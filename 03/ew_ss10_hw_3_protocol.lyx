@@ -86,28 +86,229 @@ setcounter{section}{2}
 
 \begin_layout Section
 \noindent
-Neural Networks
-\end_layout
-
-\begin_layout Subsection
-\noindent
 Simple Regression with Neural Networks
 \end_layout
 
+\begin_layout Subsection
+Problem
+\end_layout
+
 \begin_layout Standard
-\begin_inset ERT
+An one dimensional feedforward neural network should be configured using
+ 
+\end_layout
+
+\begin_layout Itemize
+700 epoches
+\end_layout
+
+\begin_layout Itemize
+'trainscp' training algorithm 
+\end_layout
+
+\begin_layout Itemize
+different values for the neuron count
+\end_layout
+
+\begin_layout Standard
+The network is trained with the data in 'neuralnetworks.mat' and some plots
+ about the function values and mean square erros were taken.
+\end_layout
+
+\begin_layout Subsection
+Methods
+\end_layout
+
+\begin_layout Standard
+To make reusable unit we tried to devide the exerise into smaller units,
+ which maybe could be used for other homeworks too.
+ 
+\end_layout
+
+\begin_layout Standard
+TODO add src
+\end_layout
+
+\begin_layout Subsection
+Result 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_1_mse_for_neuron_counts_error.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
 
 
-\backslash
-input{problem_3_1}
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+MSE for the count of neurons
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_1_1_neurons_xy_curves.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The learned function using 1 neuron
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_1_2_neurons_xy_curves.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The learned function using 2 neurons
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw3/plot_3_1_8_neurons_xy_curves.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The learned function using 8 neurons
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Discussion
+\end_layout
+
+\begin_layout Standard
+Increasing the count of neurons used to interpolate the function which transform
+s the input values to the output values causes the function to fit more
+ points.
+\end_layout
+
+\begin_layout Standard
+Looking at the first figure where only one neuron is used, the function
+ is quite similar to a connection of all points, but actually it touches
+ only 2 points.
+ Note that the sign of the greadient does not change.
+ It always keeps negative.
+ The curve calculated using 2 neurons changes its direction one time.
+\end_layout
+
+\begin_layout Standard
+By continuing increasing the number of neurons the function begin to touch
+ parts of the points very good, but others bad.
+ Starting with 4 neurons the error is very less.
+ 8 Neurons do quite perfectly touch the points.
+ So the best value for the count of neurons in 8.
 \end_layout
 
 \begin_layout Standard
@@ -115,23 +316,68 @@ TODO: interpret plots, best value of n, compare to hw 1, connection n degree
  of polynomial
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Regularized Neural Networks
 \end_layout
 
-\begin_layout Subsubsection
-Weight Decay
+\begin_layout Subsection
+Problem
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
+Calculating the full count of epoches/iterations is most of the time a unneeded
+ overhead.
+ We tried two different performance methods.
+ Changing an factor which is used the let the neuron weights keep small,
+ and another method which does two iterations, where the optimal count of
+ epoches is determined by searching a point where the gradient of the error
+ is very low.
+\end_layout
+
+\begin_layout Subsection
+Methods
+\end_layout
+
+\begin_layout Standard
+Most of the code of the first example could also be used for this one.
+ There only is a loop over the network calculation which varys the alpha
+ value for the neuron weight feedback.
+\end_layout
+
+\begin_layout Standard
+TODO: add src
+\end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_2_1_mse_for_alpha_error.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
 
 
-\backslash
-input{problem_3_2_1}
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The mean squared error of the training and of the test set for the given
+ regularization factors.
 \end_layout
 
 \end_inset
@@ -139,24 +385,323 @@ input{problem_3_2_1}
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_2_1_0.90_alpha_xy_curves.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The learned function for the lowest alpha value = 0.90
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_2_1_1.00_alpha_xy_curves.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The learned function for the highest and best alpha value = 1.00
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Discussion
+\end_layout
+
+\begin_layout Standard
+The figure 5 shows that there is a local minima at alpha=0.95 where the mean
+ square error still is around 0.1.
+ The best value was found at alpha=1, cause here the MSE is near zero.
+ The whole thing looks very similar to the processes done in homework 1.
+ There also was approximation between point, where a polynomial formula
+ with a concrete degree was used.
+ The MSE function for the degree looks similar to the MSE plot for the number
+ of neurons, alpha and the count of epoches used.
+ We did nun see an example for overfitting here, but underfitting can be
+ compared pretty good.
+ In such a case the approximation does not have enough degrees of freedom
+ to touch all the points.
+\end_layout
+
+\begin_layout Standard
+So here we are using msereg instead of mse for the performance function.
+ The higher alpha gets the better the approximation looks.
+ Unit it reaches the highest value of 1.
+ But also using this regulation factor does not satisfy the exercise.
+ Some points are still not touch from he curve.
+ Looking at the equation on the exercise sheet a value of 1 means, that
+ there is no regulation at all done.
+\end_layout
+
+\begin_layout Section
 Early Stopping
 \end_layout
 
+\begin_layout Subsection
+Problem
+\end_layout
+
 \begin_layout Standard
-\begin_inset ERT
+As described above, another easy performance improvement is, only to calculate
+ as much epoches as help to get the function better.
+ If the gradient of the error function goes near zero the network training
+ is stopped.
+ This means there is not enough changing of the error anymore for higher
+ epoch count values.
+\end_layout
+
+\begin_layout Subsection
+Methods
+\end_layout
+
+\begin_layout Standard
+Also at this exercise many code lines could be reused in form of abstract
+ methods which get the concrete values for the given scenario.
+\end_layout
+
+\begin_layout Subsection
+Results
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_2_2_27_epochs_error.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
 
 
-\backslash
-input{problem_3_2_2}
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error for the number of epoches - Early Stopped.
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_2_2_27_epochs_xy_curves.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The learned function - Early Stopped.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_2_2_700_epochs_error.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Error for the number of epoches - All 700 Epoches.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename plot_3_2_2_700_epochs_xy_curves.png
+	lyxscale 20
+	width 15cm
+	groupId plot
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The learned function - All 700 Epoches.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Discussion
+\end_layout
+
+\begin_layout Standard
+Although our early stopping implementation uses a minimum gradient magnitude
+ of 0.0001, the optimal epoche count found is 27 of 700 total ones.
+ So nearly 96% of the epoches do not make the result better and are therefor
+ skipped.
+ Figure 10 shows very nice how senseless a calculation of 700 epoches is
+ and that after 4% of the total calculation planned the optimal point is
+ found.
+ Plot 9 and 11 show nearly the same result - as meaned above the error does
+ not change more than 0.0001 between the fast and very slow calculation.
+\end_layout
+
+\begin_layout Standard
+But this benefit could only be managed by an extra iteration which actually
+ uses all the amount of epoches.
+\end_layout
+
+\begin_layout Standard
+Parallel calculations always can be done faster then synchron ones.
+ So instead of increasing the number of epoches, searching for the best
+ regulation factor for the neuron weights, or doing some other overhead,
+ just watching the result of this concrete input and output data would make
+ sense.
+ Keep It Small And Simple - so the first method using a simple regression
+ would be our choice.
 \end_layout
 
 \end_body
