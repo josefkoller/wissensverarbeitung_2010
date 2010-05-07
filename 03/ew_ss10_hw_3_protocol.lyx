@@ -120,17 +120,45 @@ Methods
 \end_layout
 
 \begin_layout Standard
-To make reusable unit we tried to devide the exerise into smaller units,
- which maybe could be used for other homeworks too.
+To make reusable code units we tried to divide the exercise into smaller
+ units, which maybe could be used for other homeworks too.
  
 \end_layout
 
 \begin_layout Standard
-TODO add src
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{problem_3_1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{load_input}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
-Result 
+Results
 \end_layout
 
 \begin_layout Standard
@@ -144,7 +172,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_1_mse_for_neuron_counts_error.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -181,7 +209,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_1_1_neurons_xy_curves.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -222,7 +250,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_1_2_neurons_xy_curves.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -257,9 +285,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename /Users/josefkoller/Documents/Uni/DropBox/Dropbox/uni/6. Semester/wissensverarbeitung/hw3/plot_3_1_8_neurons_xy_curves.png
+	filename plot_3_1_8_neurons_xy_curves.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -364,7 +392,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_2_1_mse_for_alpha_error.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -405,7 +433,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_2_1_0.90_alpha_xy_curves.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -445,7 +473,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_2_1_1.00_alpha_xy_curves.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -540,7 +568,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_2_2_27_epochs_error.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -576,7 +604,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_2_2_27_epochs_xy_curves.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -612,7 +640,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_2_2_700_epochs_error.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
@@ -648,7 +676,7 @@ status open
 \begin_inset Graphics
 	filename plot_3_2_2_700_epochs_xy_curves.png
 	lyxscale 20
-	width 15cm
+	width 11cm
 	groupId plot
 
 \end_inset
