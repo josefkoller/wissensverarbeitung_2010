@@ -1,3 +1,4 @@
+% plot_error
 function [] = plot_error(error_test, error_training, ...
     figure_title, x_label, plot_filename_prefix, x)
     figure;
@@ -14,7 +15,7 @@ function [] = plot_error(error_test, error_training, ...
   
     hold on; 
     
-     if exist('x', 'var')
+    if exist('x', 'var')
         plot(x, error_test, 'b');
     else
         plot(error_test, 'b');

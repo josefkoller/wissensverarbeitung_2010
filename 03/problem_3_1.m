@@ -32,7 +32,8 @@ for neuron_count = neuron_count_list
     x = x_min:x_step:x_max;
     y_learned = sim(network, x);
 
-    figure_title = sprintf('training points and learned function - neurons: %d', neuron_count);
+    figure_title = sprintf(...
+        'training points and learned function - neurons: %d', neuron_count);
     plot_curves(x, y_learned, x_train, y_train, ...
         figure_title, plot_filename_prefix)
 end
