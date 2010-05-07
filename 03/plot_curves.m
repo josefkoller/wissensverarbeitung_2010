@@ -4,13 +4,10 @@ function [] = plot_curves(x, y_learned, x_train, y_train, ...
       
     hold on;
     plot(x_train, y_train, 'g.');
-    title(figure_title);
-    xlabel('x training');
-    ylabel('y training');
-   
+    title(figure_title);   
     plot(x, y_learned, 'm'); 
     xlabel('x');
-    ylabel('y learned');
+    ylabel('y');
       
     legend('training data', 'learned data');
     hold off;
