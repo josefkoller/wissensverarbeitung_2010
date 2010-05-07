@@ -3,6 +3,9 @@
 clear all;
 close all;
 
+%System = context() % [variable_name] = [class_name]([constructor_parameters]);
+% System.set('N', [1, 2, 3, 4, 6, 9])
+
 N = [1,2,3,4,6,8];
 
 x_min = 0;
