@@ -1,72 +1,63 @@
-% problem 3_2_2
 
+% problem 3_2_2
 
 clear all;
 close all;
 
-load('neuralnetworks.mat');
+[ x_test, y_test, x_train, y_train, TestSet, x_min, x_max, x_step] = load_input();
 
-x_test = x_test';
-y_test = y_test';
-x_train = x_train';
-y_train = y_train';
+MIN_GRADIENT_DESCENT = 0.0001;
+performance_function = 'mse';
+neuron_count = 8;
+epoch_count = 700;
+if exist('SPEED', 'file')
+    epoch_count = 50;
+end
 
-TestSet.P = x_test;
-TestSet.T = y_test;
+[ network, performance ] = create_and_train_network( x_min, x_max, ...
+    neuron_count, performance_function, epoch_count, ...
+    x_train, y_train, x_test, y_test);
 
-min = 0;
-max = 7;
-x = min:0.05:max;
+% check trained network with new input
+x = x_min:x_step:x_max;
+y_learned = sim(network, x);
 
-net = newff([0 7], [20, 1], {'logsig', 'purelin'}, 'trainscg');
+plot_filename_prefix = sprintf('3_2_2_%d_epochs', epoch_count);
+figure_title = 'training and test data - Early Stopping';
+plot_curves(x, y_learned, x_train, y_train, ...
+    figure_title, plot_filename_prefix)
 
-net = init(net);
+figure_title = 'MSE for the number of epochs used - Early Stopping';
+error_x_label = '# epochs';
+plot_error(performance.tperf, performance.perf, ...
+    figure_title, error_x_label, plot_filename_prefix); 
 
-net.performFcn = 'mse';
-net.trainParam.epochs = 700;
-net.trainParam.show = NaN;
+%min MSE
+mse_gradient = gradient(performance.perf);
+for i = 1:length(mse_gradient)
+    if mse_gradient(i) < MIN_GRADIENT_DESCENT && mse_gradient(i) > -MIN_GRADIENT_DESCENT
+        epoch_count = i; % min gradient reached
+        break;
+    end
+end
 
-% Save network parameters ! We have to use the SAME intial conditions!!
-net2 = net;
+%[min_mse, epoch_index_with_min_error] = min(performance.perf);
 
-[net, perf] = train(net, x_train, y_train, [],[],[], TestSet);
+%configure
+network2 = network;
+network2.trainParam.epochs = epoch_count;
+[network2, performance2] = train(network2, x_train, y_train, [],[],[], TestSet);
 
+% check trained network with new input
+x = x_min:x_step:x_max;
+y_learned = sim(network2, x);
 
-mseTrain = sum((y_train - sim(net, x_train)).^2) / length(x_train);
-mseTest = sum((y_test - sim(net, x_test)).^2) / length(x_test);
+plot_filename_prefix = sprintf('3_2_2_%d_epochs', epoch_count);
+figure_title = 'training and test data - Early Stopping';
+plot_curves(x, y_learned, x_train, y_train, ...
+    figure_title, plot_filename_prefix)
 
-[minMSE, index] = min(perf.tperf);
-
-fprintf('ES: %f mse on training set, %f final mse on testset, ES mse on testset: %f\n', mseTrain, mseTest, minMSE);
-
-net2.trainParam.epochs = index;
-
-[net2, perf] = train(net2, x_train, y_train, [],[],[], TestSet);
-
-
-figure;
-clf reset
-
-y_learned1 = sim(net, x);
-y_learned2 = sim(net2, x);
-
-hold on;
-plot(x_train, y_train, 'g.');
-plot(x, y_learned1, 'm'); 
-plot(x, y_learned2, 'r'); 
-
-
-figure;
-clf reset
-
-y_learned = sim(net, x);
-
-title('Training and learned function');
-hold on;
-plot(x_train, y_train, 'g.');
-plot(x, y_learned, 'm'); 
-ylabel('y');
-xlabel('x');
-legend('Train', 'Learned');
-print('-dpng', '-r300', sprintf('plot_%s.png', ...
-    '3_2_2'));
+figure_title = 'MSE for the number of epochs used';
+error_x_label = '# epochs';
+plot_error(performance2.tperf, performance2.perf, ...
+    figure_title, error_x_label, plot_filename_prefix); 

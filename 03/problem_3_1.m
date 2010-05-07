@@ -1,23 +1,40 @@
-% problem 3.1
+
+% problem 3_1
 
 clear all;
 close all;
 
-%System = context() % [variable_name] = [class_name]([constructor_parameters]);
-% System.set('N', [1, 2, 3, 4, 6, 9])
+[ x_test, y_test, x_train, y_train, TestSet, x_min, x_max, x_step] = load_input();
 
-N = [1,2,3,4,6,8];
+neuron_count_list = [1,2,3,4,6,8];
 
-x_min = 0;
-x_max = 7;
-plot_filename_prefix = '3_1';
-title_getter = @(index) sprintf('Neuron: %d', N(index) );
-neuron_number_getter = @(index) N(index);
-loop_length = length(N);
-net_modifier = @(net, index) setPerformFcn(net, 'mse');
+performance_function = 'mse';
+epoch_count = 700;
+if exist('SPEED', 'file')
+    epoch_count = 50;
+end
 
+for neuron_count = neuron_count_list
+    [ network, performance ] = create_and_train_network( x_min, x_max, ...
+        neuron_count, performance_function, epoch_count, ...
+        x_train, y_train, x_test, y_test);
 
-teach_and_plot_feedforward_neural_network(plot_filename_prefix, title_getter, ...
-    neuron_number_getter, loop_length, net_modifier );
+    mse_train = sum((y_train - sim(network, x_train)).^2) / length(x_train);
+    mse_test = sum((y_test - sim(network, x_test)).^2) / length(x_test);
 
+    plot_filename_prefix = sprintf('3_2_1_%d_neurons', neuron_count);
+    figure_title = sprintf('MSE for the number of epochs used - Simple Regression - neurons: %d', neuron_count);
+    error_x_label = '# epochs';
+    plot_error(performance.tperf, performance.perf, ...
+        figure_title, error_x_label, plot_filename_prefix); 
+    
+    % check trained network with new input
+    x = x_min:x_step:x_max;
+    y_learned = sim(network, x);
+
+    figure_title = sprintf('training and test data - Weight Decay - Simple Regression - neurons: %d', neuron_count);
+    plot_curves(x, y_learned, x_train, y_train, ...
+        figure_title, plot_filename_prefix)
+end
+    
 
