@@ -161,6 +161,54 @@ input{load_input}
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{create_and_train_network}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{plot_curves}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{plot_error}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 Results
 \end_layout
@@ -321,6 +369,16 @@ Discussion
 \end_layout
 
 \begin_layout Standard
+By increasing the count of neurons we see that more and more points of the
+ learning data end up on the learned function.
+ This would suggest that the learned function with 8 neurons is the best
+ fit.
+ But looking at the MSE for the testdata it is obvious that the best function
+ is generated with 2 neurons.
+ Afterwards over-fitting occurs.
+\end_layout
+
+\begin_layout Standard
 Increasing the count of neurons used to interpolate the function which transform
 s the input values to the output values causes the function to fit more
  points.
@@ -336,7 +394,7 @@ Looking at the first figure where only one neuron is used, the function
 \end_layout
 
 \begin_layout Standard
-By continuing increasing the number of neurons the function begin to touch
+By continually increasing the number of neurons the function begins to touch
  parts of the points very good, but others bad.
  Starting with 4 neurons the error is very less.
  8 Neurons do quite perfectly touch the points.
@@ -364,10 +422,10 @@ Problem
 Calculating the full count of epoches/iterations is most of the time a unneeded
  overhead.
  We tried two different performance methods.
- Changing an factor which is used the let the neuron weights keep small,
- and another method which does two iterations, where the optimal count of
- epoches is determined by searching a point where the gradient of the error
- is very low.
+ Changing a factor which is used the let the neuron weights don't get too
+ large, and another method which does two iterations, where the optimal
+ count of epoches is determined by searching a point where the gradient
+ of the error is very low.
 \end_layout
 
 \begin_layout Paragraph
@@ -381,7 +439,19 @@ Most of the code of the first example could also be used for this one.
 \end_layout
 
 \begin_layout Standard
-TODO: add src
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{problem_3_2_1}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -503,6 +573,10 @@ Discussion
 \end_layout
 
 \begin_layout Standard
+TODO Joe is wrong..
+\end_layout
+
+\begin_layout Standard
 The figure 5 shows that there is a local minima at alpha=0.95 where the mean
  square error still is around 0.1.
  The best value was found at alpha=1, cause here the MSE is near zero.
@@ -536,8 +610,8 @@ Problem
 \end_layout
 
 \begin_layout Standard
-As described above, another easy performance improvement is, only to calculate
- as much epoches as help to get the function better.
+As described above, another easy performance improvement is, to only calculate
+ new epoches until the function doesn't get any better.
  If the gradient of the error function goes near zero the network training
  is stopped.
  This means there is not enough changing of the error anymore for higher
@@ -551,6 +625,22 @@ Methods
 \begin_layout Standard
 Also at this exercise many code lines could be reused in form of abstract
  methods which get the concrete values for the given scenario.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+input{problem_3_2_2}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
